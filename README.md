@@ -5,5 +5,7 @@
 
 Integrantes:
 Diego A. Polanco L.
+
 Oscar S. Muñoz R.
+
 Andrés R. Chamorro M.
