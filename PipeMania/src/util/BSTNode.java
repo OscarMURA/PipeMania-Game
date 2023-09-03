@@ -1,6 +1,6 @@
 package util;
 
-public class BSTNode<T extends  Comparable<T>> {
+public class BSTNode<T extends  Comparable<T>> implements Node {
 
     private T value;
     private BSTNode parent;
@@ -11,8 +11,8 @@ public class BSTNode<T extends  Comparable<T>> {
 
     private BSTNode right;
 
-    public BSTNode(T value) {
-        this.value = value;
+    public BSTNode(Object value) {
+        this.value = (T) value;
         this.left = null;
         this.right = null;
     }
@@ -29,14 +29,13 @@ public class BSTNode<T extends  Comparable<T>> {
         this.parent = parent;
     }
 
-    public BSTNode(T value, BSTNode left, BSTNode right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
+    public T getContent() {
+        return this.value;
     }
 
-    public T getValue() {
-        return this.value;
+    @Override
+    public void setContent(Object p) {
+        this.value = (T) p;
     }
 
     public BSTNode getLeft() {

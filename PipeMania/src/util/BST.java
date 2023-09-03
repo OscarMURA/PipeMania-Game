@@ -21,14 +21,14 @@ public class BST <T extends Comparable<T>>  extends Collections{
     }
 
     public void add(BSTNode current, BSTNode node){
-        if((current.getValue().compareTo(node.getValue())>0)){
+        if((current.getContent().compareTo(node.getContent())>0)){
             if (current.getLeft() == null) {
                 current.setLeft(node);
             } else {
                 add(current.getLeft(), node);
             }
 
-        }else if(current.getValue().compareTo(node.getValue())<0){
+        }else if(current.getContent().compareTo(node.getContent())<0){
 
             if (current.getRight()==null){
                 current.setRight(node);
@@ -47,7 +47,7 @@ public class BST <T extends Comparable<T>>  extends Collections{
         String result="";
         if(current!=null){
             result+=inOrdenWithToString(current.getLeft());
-            result+="* "+current.getValue().toString()+"\n";
+            result+="* "+current.getContent().toString()+"\n";
             result+=inOrdenWithToString(current.getRight());
         }
         return result;
@@ -62,7 +62,7 @@ public class BST <T extends Comparable<T>>  extends Collections{
     private T getMaximum(BSTNode current){
         T result;
         if(current.getRight()==null){
-            result= (T) current.getValue();
+            result= (T) current.getContent();
         }else{
             result= getMaximum(current.getRight());
         }
