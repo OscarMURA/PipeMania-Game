@@ -42,4 +42,26 @@ public class NodeDouble implements Node {
     public String toString() {
         return "Nodo: " + c.toString() + ".";
     }
+
+    public NodeDouble get(int index){
+        NodeDouble node;
+        if(index == 0){
+            node = this;
+        }else{
+            if(next == null){
+                node = null;
+            }else{
+                node = next.get(index-1);
+            }
+        }
+        return node;
+    }
+
+    public void set(int index, Object object){
+        if(index == 0){
+            this.setContent(object);
+        }else{
+            next.set(index-1, object);
+        }
+    }
 }
