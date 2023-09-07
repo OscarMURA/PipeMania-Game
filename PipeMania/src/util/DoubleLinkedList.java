@@ -8,7 +8,7 @@ package util;
  * @since August 2023
  */
 
-public class DoubleLinkedList {
+public class DoubleLinkedList extends Collections{
 	/**
 	 * referencia al primer elemento de la lista
 	 */
@@ -39,7 +39,8 @@ public class DoubleLinkedList {
 		numItems++;
 	}
 
-	public void addLast(Object n) {
+	@Override
+	public void add(Object n) {
 		NodeDouble newNode= new NodeDouble(n);
 		
 		if(last == null) {
@@ -74,5 +75,14 @@ public class DoubleLinkedList {
 				first.set(index, object);
 			}
 		}
+	}
+
+	@Override
+	public boolean isEmpty(){
+		boolean out = false;
+		if(numItems == 0){
+			out = true;
+		}
+		return out;
 	}
 }
