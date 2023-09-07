@@ -3,13 +3,13 @@ package util;
 public class BSTNode<T extends  Comparable<T>> implements Node {
 
     private T value;
-    private BSTNode parent;
+    private BSTNode<T> parent;
     private int size;
 
-    private BSTNode left;
+    private BSTNode <T> left;
 
 
-    private BSTNode right;
+    private BSTNode <T> right;
 
     public BSTNode(Object value) {
         this.value = (T) value;
@@ -17,7 +17,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.right = null;
     }
 
-    public BSTNode getParent() {
+    public BSTNode<T> getParent() {
         return parent;
     }
 
@@ -25,7 +25,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         return size;
     }
 
-    public void setParent(BSTNode parent) {
+    public void setParent(BSTNode<T> parent) {
         this.parent = parent;
     }
 
@@ -38,11 +38,11 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.value = (T) p;
     }
 
-    public BSTNode getLeft() {
+    public BSTNode<T> getLeft() {
         return this.left;
     }
 
-    public BSTNode getRight() {
+    public BSTNode<T> getRight() {
         return this.right;
     }
 
@@ -50,11 +50,11 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.value = value;
     }
 
-    public void setLeft(BSTNode left) {
+    public void setLeft(BSTNode<T> left) {
         this.left = left;
     }
 
-    public void setRight(BSTNode right) {
+    public void setRight(BSTNode<T> right) {
         this.right = right;
     }
 

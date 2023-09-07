@@ -1,17 +1,12 @@
 package util;
 
-/**
- * Clase que implementa una lista doblemente enlazada 
- * implementa la interfaz Lista
- * @author angievig
- * @version 1.0
- * @since August 2023
- */
 
-public class DoubleLinkedList {
+public class DoubleLinkedList  {
+
 	/**
 	 * referencia al primer elemento de la lista
 	 */
+
 	private NodeDouble first;
 	
 	/**
