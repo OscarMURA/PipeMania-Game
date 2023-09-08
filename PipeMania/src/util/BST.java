@@ -66,4 +66,6 @@ public class BST <T extends Comparable<T>>  extends Collections{
         return root==null;
     }
 
+
+
 }
