@@ -85,4 +85,14 @@ public class DoubleLinkedList extends Collections{
 		}
 		return out;
 	}
+
+	public boolean remove(int index){
+		boolean out = false;
+		if(numItems<index){
+			out = true; //Se eliminó correctamente
+			first.remove(index);
+		}
+		numItems--;
+		return out;
+	}
 }
