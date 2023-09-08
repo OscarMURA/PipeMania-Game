@@ -64,4 +64,16 @@ public class NodeDouble implements Node {
             next.set(index-1, object);
         }
     }
+
+    public void remove(int index){
+        if(index == 0){
+            NodeDouble tempNext = next;
+            NodeDouble tempPrev = prev;
+            next.setPrev(tempPrev);
+            prev.setNext(tempNext);
+            c = null;
+        }else{
+            next.remove(index-1);
+        }
+    }
 }

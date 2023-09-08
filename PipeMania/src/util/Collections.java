@@ -10,4 +10,5 @@ public abstract class Collections {
 
     public abstract boolean isEmpty();
 
+
 }

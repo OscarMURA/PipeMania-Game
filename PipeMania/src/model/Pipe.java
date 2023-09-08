@@ -23,6 +23,13 @@ public class Pipe{
             case "o":
                 type=PipeType.ELBOW;
                 break;
+            case "F":
+                type=PipeType.F;
+                break;
+
+            case "D":
+                type=PipeType.D;
+                break;
         }
     }
     public String getContent() {

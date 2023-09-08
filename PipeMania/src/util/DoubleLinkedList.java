@@ -1,7 +1,18 @@
 package util;
 
-
 public class DoubleLinkedList extends Collections{
+
+
+	public DoubleLinkedList() {
+		this.first = null;
+		this.last = null;
+		this.numItems = 0;
+
+	}
+
+	/**
+	 * referencia al primer elemento de la lista
+	 */
 
 
 	private NodeDouble first;
@@ -46,7 +57,7 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
-	public Object get(int index){
+	public NodeDouble get(int index){
 		NodeDouble node;
 		if(index>=numItems){
 			node = null;
@@ -56,7 +67,7 @@ public class DoubleLinkedList extends Collections{
 			node = first.get(index);
 		}
 		
-		return node.getContent();
+		return node;
 	}
 
 	public void set(int index, Object object){
@@ -75,6 +86,16 @@ public class DoubleLinkedList extends Collections{
 		if(numItems == 0){
 			out = true;
 		}
+		return out;
+	}
+
+	public boolean remove(int index){
+		boolean out = false;
+		if(numItems<index){
+			out = true; //Se eliminó correctamente
+			first.remove(index);
+		}
+		numItems--;
 		return out;
 	}
 }
