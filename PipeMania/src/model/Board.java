@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Random;
 import util.Collections;
 import util.DoubleLinkedList;
@@ -9,8 +10,7 @@ public class Board {
     private Collections board;
     private Random rd;
 
-
-    public Board(int colum, int row){
+    public Board(int colum, int row) {
         this.colum = colum;
         this.row = row;
         rd = new Random();
@@ -29,64 +29,62 @@ public class Board {
         return board;
     }
 
-    private void initBoard(){
-        board= new DoubleLinkedList();
-        int amountNode= colum*row;
+    private void initBoard() {
+        board = new DoubleLinkedList();
+        int amountNode = colum * row;
         board = addPipe(amountNode, board);
-        generateRandomSourceAndDrain(0,0,0,0);
+        generateRandomSourceAndDrain(0, 0, 0, 0);
     }
 
-
-    private Collections addPipe(int counter, Collections board){
-      Collections result;
-      if(counter==0){
-          result = board;
-      }else{
-          Pipe pipe = new Pipe();
-          board.add(pipe);
-          result = addPipe(counter-1, board);
-      }
-      return result;
+    private Collections addPipe(int counter, Collections board) {
+        Collections result;
+        if (counter == 0) {
+            result = board;
+        } else {
+            Pipe pipe = new Pipe();
+            board.add(pipe);
+            result = addPipe(counter - 1, board);
+        }
+        return result;
     }
 
-    public void generateRandomSourceAndDrain(int rowSource, int columSource, int rowDrain, int columDrain){
-        if(!(Math.abs(rowSource-rowDrain)+Math.abs(columSource-columDrain) < 4)) {
-            int PositionSource = this.colum*(columSource-1)+rowSource-1;
-            int PositionDrain = this.colum*(columDrain-1)+rowDrain-1;
+    public void generateRandomSourceAndDrain(int rowSource, int columSource, int rowDrain, int columDrain) {
+        if (!(Math.abs(rowSource - rowDrain) + Math.abs(columSource - columDrain) < 4)) {
+            int PositionSource = this.colum * (columSource - 1) + rowSource - 1;
+            int PositionDrain = this.colum * (columDrain - 1) + rowDrain - 1;
             Pipe source = (Pipe) (((DoubleLinkedList) board).get(PositionSource)).getContent();
             Pipe drain = (Pipe) (((DoubleLinkedList) board).get(PositionDrain)).getContent();
             source.setContent("F");
             drain.setContent("D");
 
-        }else {
+        } else {
 
-            rowSource = rd.nextInt(row)+1;
-            columSource = rd.nextInt(colum)+1;
-            rowDrain = rd.nextInt(row)+1;
-            columDrain = rd.nextInt(colum)+1;
+            rowSource = rd.nextInt(row) + 1;
+            columSource = rd.nextInt(colum) + 1;
+            rowDrain = rd.nextInt(row) + 1;
+            columDrain = rd.nextInt(colum) + 1;
             generateRandomSourceAndDrain(rowSource, columSource, rowDrain, columDrain);
         }
     }
 
-    public void changePipe(int row, int colum, String pipe){
+    public void changePipe(int row, int colum, String pipe) {
 
-        int position = this.colum*(colum)+row;
+        int position = this.colum * (colum) + row;
         Pipe pipe1 = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
         pipe1.setContent(pipe);
     }
 
-    public String genereteBoardPrint(){
-        String out = "";
+    public String genereteBoardPrint() {
+        StringBuilder out = new StringBuilder();
         for (int i = 0; i < colum; i++) {
             for (int j = 0; j < row; j++) {
-                int position = this.colum*(i)+j;
+                int position = this.colum * (i) + j;
                 Pipe pipe = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
-                out += pipe.getContent() + " ";
+                out.append(pipe.getContent()).append("  ");
             }
-            out += "\n";
+            out.append("\n");
         }
-        return out;
+        return out.toString();
     }
-
 
 }

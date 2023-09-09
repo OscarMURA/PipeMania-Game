@@ -1,9 +1,20 @@
 package model;
 
 public enum TypePipe {
-    F,
-    D,
-    VERTICAL,
-    HORIZONTAL,
-    CIRCULAR,
+    F("F"),
+    D("D"),
+    VERTICAL("||"),
+    HORIZONTAL("="),
+    CIRCULAR("o");
+
+    private final String symbol;
+
+    TypePipe(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return symbol;
+    }
 }
