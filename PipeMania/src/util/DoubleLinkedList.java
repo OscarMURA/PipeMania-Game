@@ -7,7 +7,6 @@ public class DoubleLinkedList extends Collections{
 		this.first = null;
 		this.last = null;
 		this.numItems = 0;
-
 	}
 
 	/**

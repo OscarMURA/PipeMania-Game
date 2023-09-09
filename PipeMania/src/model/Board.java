@@ -4,6 +4,7 @@ import util.Collections;
 import util.DoubleLinkedList;
 
 public class Board {
+
     private int colum;
     public int row;
     private Collections board;
@@ -30,8 +31,8 @@ public class Board {
     }
 
     private void initBoard(){
-        board= new DoubleLinkedList();
-        int amountNode= colum*row;
+        board = new DoubleLinkedList();
+        int amountNode = colum*row;
         board = addPipe(amountNode, board);
         generateRandomSourceAndDrain(0,0,0,0);
     }
@@ -69,7 +70,6 @@ public class Board {
     }
 
     public void changePipe(int row, int colum, String pipe){
-
         int position = this.colum*(colum)+row;
         Pipe pipe1 = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
         pipe1.setContent(pipe);
@@ -87,6 +87,5 @@ public class Board {
         }
         return out;
     }
-
 
 }

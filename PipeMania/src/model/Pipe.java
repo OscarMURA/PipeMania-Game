@@ -32,6 +32,7 @@ public class Pipe{
                 break;
         }
     }
+    
     public String getContent() {
         return content;
     }
