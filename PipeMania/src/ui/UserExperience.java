@@ -11,6 +11,15 @@ public class UserExperience {
 		reader = new Scanner(System.in);
 	}
 
+	public void lines() {
+		System.out.println("\033[47;35m"
+				+ "\n\3\3------------\4\4------------\3\3------------\4\4------------\3\3------------\4\4------------\3\3\033[0m\n");
+	}
+
+	public void title(Object title) {
+		System.out.println("\t\033[47;35m \3 " + title + " \3 \033[0m \n");
+	}
+
 	public int validateInt() {
 		int option = 0;
 		boolean validInput = false;
