@@ -90,13 +90,14 @@ public class Board {
     public boolean validationPipes(){
         boolean result=false;
         int posCurrent=this.init;
-        Pipe current=(Pipe)((DoubleLinkedList) board).get(init).getContent();
+        NodeDouble currentNode=((DoubleLinkedList) board).get(init);
+        Pipe current=(Pipe) currentNode.getContent();
         Pipe aux=new Pipe();
-        result=validationPipesRecursively(posCurrent,true,aux,current);
+        result=validationPipesRecursively(posCurrent,aux,current, currentNode);
         return result;
     }
 
-    private boolean validationPipesRecursively(int posCurrent, boolean following,Pipe last, Pipe current) {
+    private boolean validationPipesRecursively(int posCurrent,Pipe last, Pipe current,NodeDouble currentNode ) {
         boolean result;
         int pos=-1;
         if (posCurrent == finaL) {
@@ -126,6 +127,7 @@ public class Board {
                     pos=posCurrent+1;
                     last=current;
                     current=pipeRigh;
+
                 } else if (pipeNextLeft) {
                     pos = posCurrent - 1;
                     last = current;
@@ -139,8 +141,9 @@ public class Board {
                     last = current;
                     current = pipeDown;
                 }
-                following = true;
-                result = validationPipesRecursively(pos, following, last, current);
+                currentNode=((DoubleLinkedList) board).get(pos);
+
+                result = validationPipesRecursively(pos, last, current,currentNode);
 
             } else {
                 result = false;
