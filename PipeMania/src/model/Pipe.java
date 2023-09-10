@@ -26,7 +26,6 @@ public class Pipe{
             case "F":
                 type=PipeType.F;
                 break;
-
             case "D":
                 type=PipeType.D;
                 break;
