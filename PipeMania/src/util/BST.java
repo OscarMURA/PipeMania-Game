@@ -1,21 +1,26 @@
 package util;
 
 public class BST <T extends Comparable<T>>  extends Collections{
-    private BSTNode<T> root;
+
+    private BSTNode root;
+
     public BST() {
         root=null;
     }
+
+
     @Override
     public void add(Object object) {
         T value=(T) object;
         if(root==null){
-            root=new BSTNode<>(value);
+            root=new BSTNode(value);
         }else{
-            BSTNode<T> node=new BSTNode<>(value);
+            BSTNode node=new BSTNode(value);
             add(root, node);
         }
     }
-    public void add(BSTNode<T> current, BSTNode<T> node){
+
+    public void add(BSTNode current, BSTNode node){
         if((current.getContent().compareTo(node.getContent())>0)){
             if (current.getLeft() == null) {
                 current.setLeft(node);
@@ -33,11 +38,12 @@ public class BST <T extends Comparable<T>>  extends Collections{
             }
         }
     }
+
     public String inOrdenWithToString(){
         return inOrdenWithToString(root);
     }
 
-    private String inOrdenWithToString(BSTNode<T> current){
+    private String inOrdenWithToString(BSTNode current){
         String result="";
         if(current!=null){
             result+=inOrdenWithToString(current.getLeft());
@@ -47,25 +53,25 @@ public class BST <T extends Comparable<T>>  extends Collections{
         return result;
     }
 
+
+
     public T getMaximum(){
         return getMaximum(root);
     }
 
-    private T getMaximum(BSTNode<T> current){
+    private T getMaximum(BSTNode current){
         T result;
         if(current.getRight()==null){
-            result= current.getContent();
+            result= (T) current.getContent();
         }else{
             result= getMaximum(current.getRight());
         }
         return result;
     }
 
+
     @Override
     public boolean isEmpty() {
         return root==null;
     }
-
-
-
 }
