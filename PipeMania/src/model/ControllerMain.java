@@ -38,7 +38,7 @@ public class ControllerMain{
         if(game.evaluatePipe()){
             actualPlayer.setMatch(game.genereteBoardPrint());
             actualPlayer.setScore(calculateMatch(game));
-            playersBST.add(actualPlayer);
+            playersBST.add(game.getPlayer());
             out = actualPlayer.toString();
         }else{
             out = "No funciona";

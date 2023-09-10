@@ -54,4 +54,8 @@ public class Game{
         }
         return out;
     }*/
+
+    public Player getPlayer(){
+        return player;
+    }
 }
