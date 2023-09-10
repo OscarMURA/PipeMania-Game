@@ -1,7 +1,6 @@
 package model;
 
 import util.BST;
-import java.util.Calendar;
 
 public class ControllerMain{
 
@@ -59,7 +58,7 @@ public class ControllerMain{
     }*/
 
     /*public double calculateMatch(){
-        int score = (100 - board.usedPipes()) * 10 - (System.currentTimeMillis()-startTime);
+        double score = (100 - board.usedPipes()) * 10 - (System.currentTimeMillis()-startTime)/1000;
         return score;
     }*/
 
