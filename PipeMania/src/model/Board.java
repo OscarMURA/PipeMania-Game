@@ -8,12 +8,14 @@ public class Board {
     public int row;
     private Collections board;
     private Random rd;
+    private Collections pipesPos;
 
 
     public Board(int colum, int row){
         this.colum = colum;
         this.row = row;
         rd = new Random();
+        pipesPos= new DoubleLinkedList();
         initBoard();
     }
 
@@ -53,6 +55,10 @@ public class Board {
         if(!(Math.abs(rowSource-rowDrain)+Math.abs(columSource-columDrain) < 4)) {
             int PositionSource = this.colum*(columSource-1)+rowSource-1;
             int PositionDrain = this.colum*(columDrain-1)+rowDrain-1;
+            //Añado las posiciones de las tuberias
+            //y la fuente es el primero
+            pipesPos.add(PositionSource);
+
             Pipe source = (Pipe) (((DoubleLinkedList) board).get(PositionSource)).getContent();
             Pipe drain = (Pipe) (((DoubleLinkedList) board).get(PositionDrain)).getContent();
             source.setContent("F");
@@ -75,18 +81,66 @@ public class Board {
         pipe1.setContent(pipe);
     }
 
-    public String genereteBoardPrint(){
-        String out = "";
-        for (int i = 0; i < colum; i++) {
-            for (int j = 0; j < row; j++) {
-                int position = this.colum*(i)+j;
-                Pipe pipe = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
-                out += pipe.getContent() + " ";
+    public void validatePosCorrectPipeFromBoard(int position, Pipe pipe){
+        //Boolean to validate that the position is valid
+        boolean pipeNextRight,pipeNextLeft,pipeNextUp,pipeNextDown;
+
+        int posDown=(Integer) (((DoubleLinkedList) pipesPos).getLast()).getContent();
+        //Compare the position with the position of the last pipe added
+        pipeNextRight=(position==posDown+1);
+        pipeNextLeft=(position==posDown-1);
+        pipeNextUp=(position==posDown-this.colum);
+        pipeNextDown=(position==posDown+this.colum);
+        //If a case is true, the pipe is added to the board
+        Pipe pipePrev= (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
+
+        if(pipeNextRight || pipeNextLeft){
+            if((pipePrev.getType().equals(TypePipe.HORIZONTAL) || pipePrev.getType().equals(TypePipe.HORIZONTAL))
+                    && pipe.getType().equals(TypePipe.HORIZONTAL)) {
+                pipesPos.add(position);
+
             }
-            out += "\n";
+        }else if(pipeNextUp || pipeNextDown){
+            if((pipePrev.getType().equals(TypePipe.VERTICAL) || pipePrev.getType().equals(TypePipe.VERTICAL))
+                    && pipe.getType().equals(TypePipe.VERTICAL)) {
+                pipesPos.add(position);
+            }
         }
-        return out;
+
+
+
+
+
+
+
+
+
     }
+
+
+
+    public String generateBoardPrint() {
+        return generateBoardPrintRecursively(0, 0,"");
+    }
+
+    public String generateBoardPrintRecursively(int i, int j, String out) {
+        String result;
+        if (i >= colum) {
+            result= out;
+        } else if (j >= row) {
+            result = generateBoardPrintRecursively(i + 1, 0, out + "\n");
+        } else {
+            int position = colum * i + j;
+            Pipe pipe = (Pipe) ((DoubleLinkedList) board).get(position).getContent();
+            result= generateBoardPrintRecursively(i, j + 1, out + pipe.getContent() + " ");
+        }
+        return result;
+    }
+
+
+
+
+
 
 
 }

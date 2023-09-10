@@ -32,6 +32,10 @@ public class Pipe{
                 break;
         }
     }
+
+    public PipeType getType() {
+        return type;
+    }
     public String getContent() {
         return content;
     }

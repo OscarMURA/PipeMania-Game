@@ -98,4 +98,11 @@ public class DoubleLinkedList extends Collections{
 		numItems--;
 		return out;
 	}
+
+	public NodeDouble getFirst() {
+		return first;
+	}
+	public NodeDouble getLast() {
+		return last;
+	}
 }
