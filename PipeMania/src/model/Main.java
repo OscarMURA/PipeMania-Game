@@ -1,15 +1,11 @@
 package model;
 import java.util.Scanner;
-import util.Collections;
-
 
 public class Main {
 
-
     public static void main(String[] args) {
          Scanner scanner=new Scanner(System.in);
-         int x;
-         int y;
+         int x;int y;
          Board board=new Board(8,8);
 
          do{
@@ -24,6 +20,6 @@ public class Main {
 
          }while(x!=-1);
 
+         System.out.println(board.validationPipes());
     }
-
 }

@@ -2,20 +2,22 @@ package model;
 import java.util.Random;
 import util.Collections;
 import util.DoubleLinkedList;
+import util.NodeDouble;
 
 public class Board {
+
     private int colum;
     public int row;
+    public int finaL;
+    public int init;
     private Collections board;
     private Random rd;
-    private Collections pipesPos;
 
 
     public Board(int colum, int row){
         this.colum = colum;
         this.row = row;
         rd = new Random();
-        pipesPos= new DoubleLinkedList();
         initBoard();
     }
 
@@ -45,6 +47,7 @@ public class Board {
           result = board;
       }else{
           Pipe pipe = new Pipe();
+          pipe.setPosition( Math.abs(colum*row-counter));
           board.add(pipe);
           result = addPipe(counter-1, board);
       }
@@ -57,8 +60,10 @@ public class Board {
             int PositionDrain = this.colum*(columDrain-1)+rowDrain-1;
             //Añado las posiciones de las tuberias
             //y la fuente es el primero
-            pipesPos.add(PositionSource);
-
+            PositionDrain=8;
+            PositionSource=35;
+            this.init=PositionSource;
+            this.finaL=PositionDrain;
             Pipe source = (Pipe) (((DoubleLinkedList) board).get(PositionSource)).getContent();
             Pipe drain = (Pipe) (((DoubleLinkedList) board).get(PositionDrain)).getContent();
             source.setContent("F");
@@ -75,49 +80,108 @@ public class Board {
     }
 
     public void changePipe(int row, int colum, String pipe){
-
         int position = this.colum*(colum)+row;
         Pipe pipe1 = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
         pipe1.setContent(pipe);
     }
 
-    public void validatePosCorrectPipeFromBoard(int position, Pipe pipe){
-        //Boolean to validate that the position is valid
-        boolean pipeNextRight,pipeNextLeft,pipeNextUp,pipeNextDown;
 
-        int posDown=(Integer) (((DoubleLinkedList) pipesPos).getLast()).getContent();
-        //Compare the position with the position of the last pipe added
-        pipeNextRight=(position==posDown+1);
-        pipeNextLeft=(position==posDown-1);
-        pipeNextUp=(position==posDown-this.colum);
-        pipeNextDown=(position==posDown+this.colum);
-        //If a case is true, the pipe is added to the board
-        Pipe pipePrev= (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
 
-        if(pipeNextRight || pipeNextLeft){
-            if((pipePrev.getType().equals(TypePipe.HORIZONTAL) || pipePrev.getType().equals(TypePipe.HORIZONTAL))
-                    && pipe.getType().equals(TypePipe.HORIZONTAL)) {
-                pipesPos.add(position);
+    public boolean validationPipes(){
+        boolean result=false;
+        int posCurrent=this.init;
+        Pipe current=(Pipe)((DoubleLinkedList) board).get(init).getContent();
+        Pipe aux=new Pipe();
+        result=validationPipesRecursively(posCurrent,true,aux,current);
+        return result;
+    }
 
+    private boolean validationPipesRecursively(int posCurrent, boolean following,Pipe last, Pipe current) {
+        boolean result;
+        int pos=-1;
+        if (posCurrent == finaL) {
+            result = true;
+
+        } else {
+
+            Pipe pipeDown= (Pipe)((DoubleLinkedList) board).get(posCurrent+this.colum).getContent();
+            Pipe pipeUp=(Pipe)((DoubleLinkedList) board).get(posCurrent-this.colum).getContent();
+            Pipe pipeRigh=(Pipe)((DoubleLinkedList) board).get(posCurrent+1).getContent();
+            Pipe pipeLeft=(Pipe)((DoubleLinkedList) board).get(posCurrent-1).getContent();
+
+            boolean pipeNextRight= pipeNextIsRightOrLeft(current,pipeRigh,last);
+            boolean pipeNextLeft= pipeNextIsRightOrLeft(current,pipeLeft,last);
+            boolean pipeNextUp= pipeNextIsUpOrDown(current,pipeUp,last);
+            boolean pipeNextDown= pipeNextIsUpOrDown(current,pipeDown,last);
+
+            //Exclusive disjunction is used because there can only be one case
+            boolean exclusiveDisjuction;
+            boolean conjuction=!(pipeNextLeft && pipeNextUp && pipeNextDown && pipeNextRight);
+            boolean disjuction=pipeNextLeft || pipeNextUp || pipeNextDown || pipeNextRight;
+            exclusiveDisjuction=conjuction && disjuction;
+
+            //This case, for the source you must have a horizontal or vertical tube
+            if (exclusiveDisjuction) {
+                if (pipeNextRight){
+                    pos=posCurrent+1;
+                    last=current;
+                    current=pipeRigh;
+                } else if (pipeNextLeft) {
+                    pos = posCurrent - 1;
+                    last = current;
+                    current = pipeLeft;
+                }else if(pipeNextUp) {
+                    pos = posCurrent - this.colum;
+                    last = current;
+                    current = pipeUp;
+                }else if(pipeNextDown) {
+                    pos = posCurrent + this.colum;
+                    last = current;
+                    current = pipeDown;
+                }
+                following = true;
+                result = validationPipesRecursively(pos, following, last, current);
+
+            } else {
+                result = false;
             }
-        }else if(pipeNextUp || pipeNextDown){
-            if((pipePrev.getType().equals(TypePipe.VERTICAL) || pipePrev.getType().equals(TypePipe.VERTICAL))
-                    && pipe.getType().equals(TypePipe.VERTICAL)) {
-                pipesPos.add(position);
-            }
+
         }
 
+        return result;
+    }
+    public boolean pipeNextIsRightOrLeft(Pipe current, Pipe next,Pipe last){
+        boolean value=false;
 
-
-
-
-
-
-
+        if ((next.getType().equals(PipeType.HORIZONTAL) || next.getType().equals(PipeType.D)) && !next.equals(last) && !next.equals(current)) {
+            if (current.getType().equals(PipeType.HORIZONTAL) || current.getType().equals(PipeType.F)) {
+                 value = true;
+            } else if (current.getType().equals(PipeType.ELBOW) && last.getType().equals(PipeType.VERTICAL) && !next.getType().equals(PipeType.D)) {
+                value = true;
+            }
+        }else if(next.getType().equals(PipeType.ELBOW) && !next.equals(last) && !current.getType().equals(PipeType.F) && !current.getType().equals(PipeType.ELBOW)) {
+            value = true;
+        }
+        return value;
 
     }
 
 
+
+    private boolean pipeNextIsUpOrDown(Pipe current, Pipe next,Pipe last){
+
+        boolean value=false;
+        if ((next.getType().equals(PipeType.VERTICAL) ||next.getType().equals(PipeType.D) && !next.equals(last) && !next.equals(current))) {
+            if (current.getType().equals(PipeType.VERTICAL) || current.getType().equals(PipeType.F)) {
+                value = true;
+            } else if (current.getType().equals(PipeType.ELBOW) && last.getType().equals(PipeType.HORIZONTAL) && !next.getType().equals(PipeType.D)) {
+                value = true;
+            }
+        }else if(next.getType().equals(PipeType.ELBOW) && !next.equals(last) && !current.getType().equals(PipeType.F)&& !current.getType().equals(PipeType.ELBOW)) {
+            value = true;
+        }
+        return value;
+    }
 
     public String generateBoardPrint() {
         return generateBoardPrintRecursively(0, 0,"");

@@ -42,6 +42,27 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
+	public Object search(Object clave) {
+		Object found =  null;
+		NodeDouble current= first;
+		
+		if (first !=null) { //Si la lista es no es vacIA se hace el recorrido
+			
+			while(current.getNext() != null && found==null) {
+				if (current.getContent().equals(clave))
+					found = current.getContent();
+				current=current.getNext();
+			}
+			//si se llegO al ultimo nodo y aun no se encuentra la clave 
+			if (current.getNext()==null && found==null) {
+				if (current.getContent().equals(clave)) //buscando en el ultimo nodo
+					found = current.getContent();
+			}
+		} // si la lista es vacía no se hace nada
+		
+		return found;
+	}
+
 	@Override
 	public void add(Object n) {
 		NodeDouble newNode= new NodeDouble(n);
