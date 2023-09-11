@@ -48,7 +48,7 @@ public class NodeDouble<T> implements Node {
         if(index == 0){
             node = this;
         }else{
-            node = this.get(index-1);
+            node = next.get(index-1);
         }
         return node;
     }
