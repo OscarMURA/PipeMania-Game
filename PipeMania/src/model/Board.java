@@ -1,6 +1,6 @@
 package model;
+
 import java.util.Random;
-import util.Collections;
 import util.DoubleLinkedList;
 import util.NodeDouble;
 
@@ -10,11 +10,10 @@ public class Board {
     public int row;
     public int finaL;
     public int init;
-    private Collections board;
+    private DoubleLinkedList<Pipe> board;
     private Random rd;
 
-
-    public Board(int colum, int row){
+    public Board(int colum, int row) {
         this.colum = colum;
         this.row = row;
         rd = new Random();
@@ -29,20 +28,17 @@ public class Board {
         return row;
     }
 
-    public Collections getBoard() {
-        return board;
-    }
 
-    private void initBoard(){
-        board= new DoubleLinkedList();
-        int amountNode= colum*row;
+
+    private void initBoard() {
+        board = new DoubleLinkedList<Pipe>();
+        int amountNode = colum * row;
         board = addPipe(amountNode, board);
-        generateRandomSourceAndDrain(0,0,0,0);
+        generateRandomSourceAndDrain(0, 0, 0, 0);
     }
 
-
-    private Collections addPipe(int counter, Collections board){
-      Collections result;
+    private DoubleLinkedList<Pipe> addPipe(int counter, DoubleLinkedList<Pipe> board){
+      DoubleLinkedList<Pipe> result;
       if(counter==0){
           result = board;
       }else{
@@ -64,8 +60,9 @@ public class Board {
             PositionDrain=24;
             this.init=PositionSource;
             this.finaL=PositionDrain;
-            Pipe source = (Pipe) (((DoubleLinkedList) board).get(PositionSource)).getContent();
-            Pipe drain = (Pipe) (((DoubleLinkedList) board).get(PositionDrain)).getContent();
+
+            Pipe source = board.get(PositionSource).getContent();
+            Pipe drain = board.get(PositionDrain).getContent();
             source.setContent("F");
             drain.setContent("D");
 
@@ -74,15 +71,20 @@ public class Board {
             columSource = rd.nextInt(colum)+1;
             rowDrain = rd.nextInt(row)+1;
             columDrain = rd.nextInt(colum)+1;
+
             generateRandomSourceAndDrain(rowSource, columSource, rowDrain, columDrain);
         }
     }
 
+
     public void changePipe(int row, int colum, String pipe){
         int position = this.colum*(colum)+row;
-        Pipe pipe1 = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
+
+        Pipe pipe1 = board.get(position).getContent();
         pipe1.setContent(pipe);
     }
+
+
 
 
 
@@ -90,7 +92,7 @@ public class Board {
 
         boolean result=false;
         int posCurrent=this.init;
-        NodeDouble currentNode=((DoubleLinkedList) board).get(init);
+        NodeDouble<Pipe> currentNode=(board).get(init);
 
         Pipe current=(Pipe) currentNode.getContent();
         Pipe aux=new Pipe();
@@ -101,7 +103,7 @@ public class Board {
     }
 
 
-    private boolean validationPipesRecursively(int posCurrent,Pipe last, Pipe current, NodeDouble currentNode) {
+    private boolean validationPipesRecursively(int posCurrent,Pipe last, Pipe current, NodeDouble<Pipe> currentNode) {
         boolean result;
         int pos=-1;
         if (posCurrent == finaL) {
@@ -114,22 +116,22 @@ public class Board {
             int posDown = posCurrent + colum, posUp = posCurrent - colum, posRight = posCurrent + 1, posLeft = posCurrent - 1;
 
             if (posDown < colum * row) {//No se sale de abajo del tablero
-                pipeDown = (Pipe) ((DoubleLinkedList) board).get(posDown).getContent();
+                pipeDown = (board).get(posDown).getContent();
                 pipeNextDown = pipeNextIsUpOrDown( last,current, pipeDown);
                 System.out.println("pipeNextDown: "+pipeNextDown);
             }
             if(posUp>=0){//No sobrepasa el limite superior
-                pipeUp = (Pipe) ((DoubleLinkedList) board).get(posUp).getContent();
+                pipeUp =  (board).get(posUp).getContent();
                 pipeNextUp = pipeNextIsUpOrDown(last, current, pipeUp);
                 System.out.println("pipeNextUp: "+pipeNextUp);
             }
             if(posLeft%colum!=0){//No sobrepasa el limite izquierdo
-                pipeLeft = (Pipe) currentNode.getPrev().getContent();
+                pipeLeft = currentNode.getPrev().getContent();
                 pipeNextLeft = pipeNextIsRightOrLeft(last, current, pipeLeft );
                 System.out.println("pipeNextLeft: "+pipeNextLeft);
             }
             if((posRight+1)%colum!=0){//No sobrepasa el limite derecho
-                pipeRigh = (Pipe) currentNode.getNext().getContent();
+                pipeRigh = currentNode.getNext().getContent();
                 pipeNextRight = pipeNextIsRightOrLeft(last, current, pipeRigh );
                 System.out.println("pipeNextRight: "+pipeNextRight);
             }
@@ -138,13 +140,13 @@ public class Board {
                 System.out.println("entre al exclusivo");
                 if(pipeNextDown) {
                     pos = posDown;
-                    currentNode=((DoubleLinkedList) board).get(posDown);
+                    currentNode=(board).get(posDown);
                     last=current;
                     current=pipeDown;
 
                 }else if(pipeNextUp) {
                     pos = posUp;
-                    currentNode=((DoubleLinkedList) board).get(posUp);
+                    currentNode=(board).get(posUp);
                     last=current;
                     current=pipeUp;
 
@@ -231,26 +233,24 @@ public class Board {
             result = generateBoardPrintRecursively(i + 1, 0, out + "\n");
         } else {
             int position = colum * i + j;
-            Pipe pipe = (Pipe) ((DoubleLinkedList) board).get(position).getContent();
+            Pipe pipe = (board).get(position).getContent();
             result= generateBoardPrintRecursively(i, j + 1, out + pipe.getContent() + " ");
         }
         return result;
     }
 
-    private void resetVisit(int i, int j ){
-        if (i >= colum) {
-            //sale
+    private void resetVisit(int i, int j ) {
+        if(i >= colum){
+            return;
         } else if (j >= row) {
             resetVisit(i + 1, 0);
         } else {
             int position = colum * i + j;
-            Pipe pipe = (Pipe) ((DoubleLinkedList) board).get(position).getContent();
+            Pipe pipe = ( board).get(position).getContent();
             pipe.setVisited(false);
             resetVisit(i, j + 1);
         }
 
-
     }
-
 
 }

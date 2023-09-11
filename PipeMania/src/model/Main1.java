@@ -1,12 +1,29 @@
 package model;
 import java.util.Scanner;
 
-public class Main {
+public class Main1 {
 
     public static void main(String[] args) {
+
          Scanner scanner=new Scanner(System.in);
          int x;int y;
          Board board=new Board(8,8);
+
+        int[] matriz = new int[64];
+
+        // Llenar la matriz con valores (solo para demostración)
+        for (int i = 0; i < 64; i++) {
+            matriz[i] = i;
+        }
+
+        // Imprimir la matriz como una cuadrícula de 8x8
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                int indice = fila * 8 + columna;
+                System.out.print(matriz[indice] + "\t");
+            }
+            System.out.println(); // Nueva línea para la siguiente fila
+        }
 
          do{
              System.out.println(board.generateBoardPrint());

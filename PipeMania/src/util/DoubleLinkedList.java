@@ -1,13 +1,12 @@
 package util;
 
-public class DoubleLinkedList extends Collections{
+public class DoubleLinkedList<T> extends Collections{
 
 
 	public DoubleLinkedList() {
 		this.first = null;
 		this.last = null;
 		this.numItems = 0;
-
 	}
 
 	/**
@@ -15,12 +14,12 @@ public class DoubleLinkedList extends Collections{
 	 */
 
 
-	private NodeDouble first;
+	private NodeDouble<T> first;
 	
 	/**
 	 * Referencia al Ultimo elemento de la lista
 	 */
-	private NodeDouble last;
+	private NodeDouble<T> last;
 	
 	/**
 	 * entero que guarda la cantidad de elementos de la lista
@@ -28,8 +27,8 @@ public class DoubleLinkedList extends Collections{
 	private int numItems;
 
 
-	public void addFirst(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+	public void addFirst(T n) {
+		NodeDouble<T> newNode = new NodeDouble<T>((T)(n));
 		
 		if(first == null) {// empty list
 			first =newNode;
@@ -44,7 +43,7 @@ public class DoubleLinkedList extends Collections{
 
 	public Object search(Object clave) {
 		Object found =  null;
-		NodeDouble current= first;
+		NodeDouble<T> current= first;
 		
 		if (first !=null) { //Si la lista es no es vacIA se hace el recorrido
 			
@@ -65,7 +64,8 @@ public class DoubleLinkedList extends Collections{
 
 	@Override
 	public void add(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+		T t=(T)(n);
+		NodeDouble<T> newNode= new NodeDouble<>(t);
 		
 		if(last == null) {
 			first = newNode;
@@ -78,8 +78,8 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
-	public NodeDouble get(int index){
-		NodeDouble node;
+	public NodeDouble<T> get(int index){
+		NodeDouble<T> node;
 		if(index>=numItems){
 			node = null;
 		}else if(index == 0){
@@ -120,10 +120,18 @@ public class DoubleLinkedList extends Collections{
 		return out;
 	}
 
-	public NodeDouble getFirst() {
-		return first;
+
+	public String showAll(){
+		String out = "";
+		if(first == null){
+			out = "No hay en la lista";
+		}else{
+			out = first.showAll();
+		}
+		return out;
 	}
-	public NodeDouble getLast() {
-		return last;
+
+	public int getNumItems(){
+		return numItems;
 	}
 }

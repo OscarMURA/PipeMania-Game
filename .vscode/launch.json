@@ -12,9 +12,16 @@
         },
         {
             "type": "java",
-            "name": "Main",
+            "name": "Main1",
             "request": "launch",
-            "mainClass": "model.Main",
+            "mainClass": "model.Main1",
+            "projectName": "tarea-integradora-1-2023-2-e9_b74d52c8"
+        },
+        {
+            "type": "java",
+            "name": "PipeMania",
+            "request": "launch",
+            "mainClass": "ui.PipeMania",
             "projectName": "tarea-integradora-1-2023-2-e9_b74d52c8"
         }
     ]
