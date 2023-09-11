@@ -5,12 +5,13 @@ import java.util.Objects;
 public class Pipe{
     private String content;
     private PipeType type;
-    private int position;
+
+    private boolean visited;
 
     public Pipe(){
         content="X";
         type=PipeType.X;
-        position=-1;
+        visited=false;
     }
     public void setContent(String value){
         content=value;
@@ -43,24 +44,19 @@ public class Pipe{
         }
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-    public int getPositon(){
-        return position;
-    }
-    public PipeType getType() {
-        return type;
-    }
     public String getContent() {
         return content;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pipe pipe)) return false;
-        return position == pipe.position && Objects.equals(getContent(), pipe.getContent()) && getType() == pipe.getType();
+    public PipeType getType() {
+        return type;
     }
 
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 }
