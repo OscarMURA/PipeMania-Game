@@ -60,8 +60,6 @@ public class Board {
             int PositionDrain = this.colum*(columDrain-1)+rowDrain-1;
             //Añado las posiciones de las tuberias
             //y la fuente es el primero
-            PositionDrain=8;
-            PositionSource=35;
             this.init=PositionSource;
             this.finaL=PositionDrain;
             Pipe source = (Pipe) (((DoubleLinkedList) board).get(PositionSource)).getContent();
@@ -104,16 +102,29 @@ public class Board {
             result = true;
 
         } else {
+            boolean pipeNextDown;
+            int posDown=(posCurrent+this.colum< row*colum-colum) ? posCurrent+this.colum:posCurrent;
+            if(posDown!=posCurrent){
+                Pipe pipeDown= (Pipe)((DoubleLinkedList) board).get(posDown).getContent();
+                pipeNextDown= pipeNextIsUpOrDown(current,pipeDown,last);
+            }else{
 
-            Pipe pipeDown= (Pipe)((DoubleLinkedList) board).get(posCurrent+this.colum).getContent();
-            Pipe pipeUp=(Pipe)((DoubleLinkedList) board).get(posCurrent-this.colum).getContent();
-            Pipe pipeRigh=(Pipe)((DoubleLinkedList) board).get(posCurrent+1).getContent();
-            Pipe pipeLeft=(Pipe)((DoubleLinkedList) board).get(posCurrent-1).getContent();
+            }
 
-            boolean pipeNextRight= pipeNextIsRightOrLeft(current,pipeRigh,last);
-            boolean pipeNextLeft= pipeNextIsRightOrLeft(current,pipeLeft,last);
+
+
+            int posUp=(posCurrent-this.colum> colum )?posCurrent-this.colum:posCurrent;
+            Pipe pipeUp=(Pipe)((DoubleLinkedList) board).get(posUp).getContent();
             boolean pipeNextUp= pipeNextIsUpOrDown(current,pipeUp,last);
-            boolean pipeNextDown= pipeNextIsUpOrDown(current,pipeDown,last);
+
+            int posRight=(posCurrent+1<colum*row)?posCurrent+1:posCurrent;
+            Pipe pipeRigh=(Pipe)((DoubleLinkedList) board).get(posRight).getContent();//(Pipe) currentNode.getNext().getContent();
+            boolean pipeNextRight= pipeNextIsRightOrLeft(current,pipeRigh,last);
+
+            int posLeft=((posCurrent-1)%colum==0 && posCurrent-1>=0 )?posCurrent-1:posCurrent;
+            Pipe pipeLeft=(Pipe)((DoubleLinkedList) board).get(posLeft).getContent();//(Pipe) currentNode.getPrev().getContent();
+            boolean pipeNextLeft= pipeNextIsRightOrLeft(current,pipeLeft,last);
+
 
             //Exclusive disjunction is used because there can only be one case
             boolean exclusiveDisjuction;
@@ -124,20 +135,20 @@ public class Board {
             //This case, for the source you must have a horizontal or vertical tube
             if (exclusiveDisjuction) {
                 if (pipeNextRight){
-                    pos=posCurrent+1;
+                    pos=posRight;
                     last=current;
                     current=pipeRigh;
 
                 } else if (pipeNextLeft) {
-                    pos = posCurrent - 1;
+                    pos = posLeft;
                     last = current;
                     current = pipeLeft;
                 }else if(pipeNextUp) {
-                    pos = posCurrent - this.colum;
+                    pos = posUp;
                     last = current;
                     current = pipeUp;
                 }else if(pipeNextDown) {
-                    pos = posCurrent + this.colum;
+                    pos = posDown;
                     last = current;
                     current = pipeDown;
                 }
@@ -157,6 +168,7 @@ public class Board {
         boolean value=false;
 
         if ((next.getType().equals(PipeType.HORIZONTAL) || next.getType().equals(PipeType.D)) && !next.equals(last) && !next.equals(current)) {
+
             if (current.getType().equals(PipeType.HORIZONTAL) || current.getType().equals(PipeType.F)) {
                  value = true;
             } else if (current.getType().equals(PipeType.ELBOW) && last.getType().equals(PipeType.VERTICAL) && !next.getType().equals(PipeType.D)) {
@@ -203,11 +215,5 @@ public class Board {
         }
         return result;
     }
-
-
-
-
-
-
 
 }
