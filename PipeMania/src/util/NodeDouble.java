@@ -1,30 +1,30 @@
 package util;
 
-public class NodeDouble implements Node {
+public class NodeDouble<T> implements Node {
 
-    private NodeDouble next;
-    private NodeDouble prev;
-    private Object c;
+    private NodeDouble<T> next;
+    private NodeDouble<T> prev;
+    private T c;
 
-    public NodeDouble(Object c) {
+    public NodeDouble(T c) {
         this.next = null;
         this.prev = null;
         this.c = c;
     }
 
-    public NodeDouble getNext() {
+    public NodeDouble<T> getNext() {
         return next;
     }
 
-    public NodeDouble getPrev() {
+    public NodeDouble<T> getPrev() {
         return prev;
     }
 
-    public void setNext(NodeDouble next) {
+    public void setNext(NodeDouble<T> next) {
         this.next = next;
     }
 
-    public void setPrev(NodeDouble prev) {
+    public void setPrev(NodeDouble<T> prev) {
         this.prev = prev;
     }
 
@@ -35,7 +35,7 @@ public class NodeDouble implements Node {
 
     @Override
     public void setContent(Object p) {
-        c = p;
+        c = ((T)(p));
     }
 
     @Override
@@ -43,16 +43,12 @@ public class NodeDouble implements Node {
         return "Nodo: " + c.toString() + ".";
     }
 
-    public NodeDouble get(int index){
-        NodeDouble node;
+    public NodeDouble<T> get(int index){
+        NodeDouble<T> node;
         if(index == 0){
             node = this;
         }else{
-            if(next == null){
-                node = null;
-            }else{
-                node = next.get(index-1);
-            }
+            node = this.get(index-1);
         }
         return node;
     }
@@ -67,8 +63,8 @@ public class NodeDouble implements Node {
 
     public void remove(int index){
         if(index == 0){
-            NodeDouble tempNext = next;
-            NodeDouble tempPrev = prev;
+            NodeDouble<T> tempNext = next;
+            NodeDouble<T> tempPrev = prev;
             next.setPrev(tempPrev);
             prev.setNext(tempNext);
             c = null;
@@ -76,4 +72,15 @@ public class NodeDouble implements Node {
             next.remove(index-1);
         }
     }
+
+    public String showAll(){
+        String out = "";
+        if(next == null){
+            out = toString();
+        }else{
+            out = toString() + next.showAll();
+        }
+        return out;
+    }
+
 }

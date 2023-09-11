@@ -1,6 +1,6 @@
 package util;
 
-public class DoubleLinkedList extends Collections{
+public class DoubleLinkedList<T> extends Collections{
 
 
 	public DoubleLinkedList() {
@@ -14,12 +14,12 @@ public class DoubleLinkedList extends Collections{
 	 */
 
 
-	private NodeDouble first;
+	private NodeDouble<T> first;
 	
 	/**
 	 * Referencia al Ultimo elemento de la lista
 	 */
-	private NodeDouble last;
+	private NodeDouble<T> last;
 	
 	/**
 	 * entero que guarda la cantidad de elementos de la lista
@@ -27,8 +27,8 @@ public class DoubleLinkedList extends Collections{
 	private int numItems;
 
 
-	public void addFirst(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+	public void addFirst(T n) {
+		NodeDouble<T> newNode = new NodeDouble<T>((T)(n));
 		
 		if(first == null) {// empty list
 			first =newNode;
@@ -43,7 +43,7 @@ public class DoubleLinkedList extends Collections{
 
 	@Override
 	public void add(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+		NodeDouble<T> newNode= new NodeDouble<T>((T)(n));
 		
 		if(last == null) {
 			first = newNode;
@@ -56,8 +56,8 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
-	public NodeDouble get(int index){
-		NodeDouble node;
+	public NodeDouble<T> get(int index){
+		NodeDouble<T> node;
 		if(index>=numItems){
 			node = null;
 		}else if(index == 0){
@@ -96,5 +96,19 @@ public class DoubleLinkedList extends Collections{
 		}
 		numItems--;
 		return out;
+	}
+
+	public String showAll(){
+		String out = "";
+		if(first == null){
+			out = "No hay en la lista";
+		}else{
+			out = first.showAll();
+		}
+		return out;
+	}
+
+	public int getNumItems(){
+		return numItems;
 	}
 }

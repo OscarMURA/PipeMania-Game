@@ -7,7 +7,6 @@ public class Player implements Comparable<Player>{
     private String nickName;
     private double score;
     private String match;
-    private Calendar dateMatch;
 
     public Player(String nickName){
         this.nickName = nickName;
@@ -36,14 +35,12 @@ public class Player implements Comparable<Player>{
 
     public void setMatch(String match){
         this.match = match;
-        dateMatch = Calendar.getInstance();
     }
 
     @Override
     public String toString(){
-        String datePlayed = "" + dateMatch.getTime();
         return "Usuario: " + nickName + ", Score = "+ 
-        score + ", date played " + datePlayed + ", match:\n" + match + "\n";
+        score + ", match:\n" + match + "\n";
     }
 
 }
