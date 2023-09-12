@@ -1,5 +1,4 @@
 package model;
-
 import java.util.Random;
 import util.DoubleLinkedList;
 import util.NodeDouble;
@@ -50,22 +49,18 @@ public class Board {
       return result;
     }
 
-    public void generateRandomSourceAndDrain(int rowSource, int columSource, int rowDrain, int columDrain){
+    private void generateRandomSourceAndDrain(int rowSource, int columSource, int rowDrain, int columDrain){
         if(!(Math.abs(rowSource-rowDrain)+Math.abs(columSource-columDrain) < 4)) {
             int PositionSource = this.colum*(columSource-1)+rowSource-1;
             int PositionDrain = this.colum*(columDrain-1)+rowDrain-1;
             //Añado las posiciones de las tuberias
             //y la fuente es el primero
-            PositionSource=4;
-            PositionDrain=24;
             this.init=PositionSource;
             this.finaL=PositionDrain;
-
             Pipe source = board.get(PositionSource).getContent();
             Pipe drain = board.get(PositionDrain).getContent();
             source.setContent("F");
             drain.setContent("D");
-
         }else {
             rowSource = rd.nextInt(row)+1;
             columSource = rd.nextInt(colum)+1;
@@ -79,7 +74,6 @@ public class Board {
 
     public void changePipe(int row, int colum, String pipe){
         int position = this.colum*(colum)+row;
-
         Pipe pipe1 = board.get(position).getContent();
         pipe1.setContent(pipe);
     }
@@ -115,29 +109,28 @@ public class Board {
             Pipe pipeDown = null, pipeUp = null, pipeRigh = null, pipeLeft = null;
             int posDown = posCurrent + colum, posUp = posCurrent - colum, posRight = posCurrent + 1, posLeft = posCurrent - 1;
 
-            if (posDown < colum * row) {//No se sale de abajo del tablero
+            if (posDown < colum * row) {//Do not leave the board
                 pipeDown = (board).get(posDown).getContent();
                 pipeNextDown = pipeNextIsUpOrDown( last,current, pipeDown);
-                System.out.println("pipeNextDown: "+pipeNextDown);
+
             }
-            if(posUp>=0){//No sobrepasa el limite superior
+            if(posUp>=0){//Does not exceed the upper limit
                 pipeUp =  (board).get(posUp).getContent();
                 pipeNextUp = pipeNextIsUpOrDown(last, current, pipeUp);
-                System.out.println("pipeNextUp: "+pipeNextUp);
+                
             }
-            if(posLeft%colum!=0){//No sobrepasa el limite izquierdo
+            if(posCurrent%colum!=0 && posCurrent!=0){//Does not exceed the left limit
                 pipeLeft = currentNode.getPrev().getContent();
                 pipeNextLeft = pipeNextIsRightOrLeft(last, current, pipeLeft );
-                System.out.println("pipeNextLeft: "+pipeNextLeft);
             }
-            if((posRight+1)%colum!=0){//No sobrepasa el limite derecho
+            if((posCurrent+1)%colum!=0){//Does not exceed the right limit
                 pipeRigh = currentNode.getNext().getContent();
                 pipeNextRight = pipeNextIsRightOrLeft(last, current, pipeRigh );
-                System.out.println("pipeNextRight: "+pipeNextRight);
+
             }
 
             if(pipeNextDown ^ pipeNextUp ^ pipeNextRight ^ pipeNextLeft){
-                System.out.println("entre al exclusivo");
+
                 if(pipeNextDown) {
                     pos = posDown;
                     currentNode=(board).get(posDown);
@@ -177,8 +170,6 @@ public class Board {
         return result;
     }
 
-
-
     public boolean pipeNextIsRightOrLeft(Pipe last, Pipe current, Pipe next){
         boolean value=false;
         if( (next.getType().equals(PipeType.HORIZONTAL) || next.getType().equals(PipeType.D)) && !next.isVisited() ){
@@ -193,23 +184,16 @@ public class Board {
         }
 
         return value;
-
     }
 
 
 
     private boolean pipeNextIsUpOrDown(Pipe last, Pipe current, Pipe next){
-
         boolean value=false;
 
-        System.out.println("next: "+next.getType());
         if( (next.getType().equals(PipeType.VERTICAL) || next.getType().equals(PipeType.D)) && !next.isVisited() ) {
-            System.out.println("Entro en el if 1");
-            System.out.println("Current: "+current.getType());
-            System.out.println("next: "+next.getType());
             if (current.getType().equals(PipeType.VERTICAL) || current.getType().equals(PipeType.F)) {
                 value = true;
-                System.out.println("\n-Entro en el if 2-");
             }
             else if (current.getType().equals(PipeType.ELBOW) && last.getType().equals(PipeType.HORIZONTAL))
                 value = true;
@@ -253,4 +237,7 @@ public class Board {
 
     }
 
+    public DoubleLinkedList<Pipe> getBoard() {
+        return board;
+    }
 }

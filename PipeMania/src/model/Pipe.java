@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Objects;
+
 
 public class Pipe{
     private String content;
@@ -34,12 +34,6 @@ public class Pipe{
             case "D":
                 type=PipeType.D;
                 break;
-
-            default: 
-                type=PipeType.X;
-                content="X";
-                break;
-
         }
     }
 
@@ -58,5 +52,9 @@ public class Pipe{
 
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    public void setType(PipeType type){
+        this.type=type;
     }
 }
