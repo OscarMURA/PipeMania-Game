@@ -7,7 +7,7 @@ public class BST <T extends Comparable<T>>  extends Collections{
     }
     @Override
     public void add(Object object) {
-        T value=(T) object;
+        T value = (T) object;
         if(root==null){
             root=new BSTNode<>(value);
         }else{

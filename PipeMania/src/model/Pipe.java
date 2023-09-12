@@ -4,9 +4,12 @@ public class Pipe {
     private String content;
     private PipeType type;
 
+    private boolean visited;
+
     public Pipe() {
         content = "X";
         type = PipeType.X;
+        visited = false;
     }
 
     public void setContent(String value) {
@@ -27,7 +30,6 @@ public class Pipe {
             case "F":
                 type = PipeType.F;
                 break;
-
             case "D":
                 type = PipeType.D;
                 break;
@@ -38,4 +40,19 @@ public class Pipe {
         return content;
     }
 
+    public PipeType getType() {
+        return type;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public void setType(PipeType type) {
+        this.type = type;
+    }
 }

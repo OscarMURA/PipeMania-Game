@@ -1,13 +1,12 @@
 package util;
 
-public class DoubleLinkedList extends Collections{
+public class DoubleLinkedList<T> extends Collections{
 
 
 	public DoubleLinkedList() {
 		this.first = null;
 		this.last = null;
 		this.numItems = 0;
-
 	}
 
 	/**
@@ -15,12 +14,12 @@ public class DoubleLinkedList extends Collections{
 	 */
 
 
-	private NodeDouble first;
+	private NodeDouble<T> first;
 	
 	/**
 	 * Referencia al Ultimo elemento de la lista
 	 */
-	private NodeDouble last;
+	private NodeDouble<T> last;
 	
 	/**
 	 * entero que guarda la cantidad de elementos de la lista
@@ -28,8 +27,8 @@ public class DoubleLinkedList extends Collections{
 	private int numItems;
 
 
-	public void addFirst(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+	public void addFirst(T n) {
+		NodeDouble<T> newNode = new NodeDouble<T>((T)(n));
 		
 		if(first == null) {// empty list
 			first =newNode;
@@ -42,9 +41,31 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
+	public Object search(Object clave) {
+		Object found =  null;
+		NodeDouble<T> current= first;
+		
+		if (first !=null) { //Si la lista es no es vacIA se hace el recorrido
+			
+			while(current.getNext() != null && found==null) {
+				if (current.getContent().equals(clave))
+					found = current.getContent();
+				current=current.getNext();
+			}
+			//si se llegO al ultimo nodo y aun no se encuentra la clave 
+			if (current.getNext()==null && found==null) {
+				if (current.getContent().equals(clave)) //buscando en el ultimo nodo
+					found = current.getContent();
+			}
+		} // si la lista es vacía no se hace nada
+		
+		return found;
+	}
+
 	@Override
 	public void add(Object n) {
-		NodeDouble newNode= new NodeDouble(n);
+		T t=(T)(n);
+		NodeDouble<T> newNode= new NodeDouble<>(t);
 		
 		if(last == null) {
 			first = newNode;
@@ -57,8 +78,8 @@ public class DoubleLinkedList extends Collections{
 		numItems++;
 	}
 
-	public NodeDouble get(int index){
-		NodeDouble node;
+	public NodeDouble<T> get(int index){
+		NodeDouble<T> node;
 		if(index>=numItems){
 			node = null;
 		}else if(index == 0){
@@ -97,5 +118,20 @@ public class DoubleLinkedList extends Collections{
 		}
 		numItems--;
 		return out;
+	}
+
+
+	public String showAll(){
+		String out = "";
+		if(first == null){
+			out = "No hay en la lista";
+		}else{
+			out = first.showAll();
+		}
+		return out;
+	}
+
+	public int getNumItems(){
+		return numItems;
 	}
 }
