@@ -27,8 +27,6 @@ public class Board {
         return row;
     }
 
-
-
     private void initBoard() {
         board = new DoubleLinkedList<Pipe>();
         int amountNode = colum * row;
@@ -240,4 +238,20 @@ public class Board {
     public DoubleLinkedList<Pipe> getBoard() {
         return board;
     }
+
+
+    public void restartBoard(){
+        restartBoard(0);
+    }
+
+    private void restartBoard(int index){
+        if(index< board.getNumItems()){
+            Pipe pipe=board.get(index).getContent();
+            pipe.setContent("X");
+            pipe.setVisited(false);
+            restartBoard(index+1);
+        }
+    }
+
+
 }

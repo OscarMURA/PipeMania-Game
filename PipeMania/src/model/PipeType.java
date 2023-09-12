@@ -1,6 +1,15 @@
 package model;
+
 public enum PipeType {
-    F,D,X,VERTICAL, HORIZONTAL, ELBOW;
+    F,
+    D,
+    VERTICAL,
+    HORIZONTAL,
+    ELBOW,
+    X;
+
+}
+
 
     
-}
+
