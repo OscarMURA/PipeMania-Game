@@ -1,13 +1,13 @@
 package ui;
 
-import model.TypePipe;
+import model.PipeType;
 import java.util.Scanner;
 import model.Board;
 
 public class PipeMania {
-    private static UserExperience userExperience;
-    private static Scanner reader;
-    private static Board board;
+    private UserExperience userExperience;
+    private Scanner reader;
+    private Board board;
 
     public PipeMania() {
         reader = new Scanner(System.in);
@@ -17,80 +17,117 @@ public class PipeMania {
 
     public static void main(String[] args) {
         PipeMania main = new PipeMania();
-        menu();
+        main.menu();
+        main.userExperience.close();
     }
 
-    public static void menu() {
-        userExperience.lines();
-        userExperience.title("Starts the game");
+    public void menu() {
+        userExperience.displayCell("PipeMania");
 
-        println("Enter an option");
-        print("1. New game\n" + "2. View Score\n" + "3. Exit\n");
+        String menuOptions = "1. New game\n" +
+                "2. View Score\n" +
+                "3. Exit";
+        userExperience.displayCell(menuOptions);
+        userExperience.print("Enter an option: ");
+
         int option = userExperience.validateInt();
         switch (option) {
             case 1 -> showGame();
             case 2 -> showScore();
-            case 3 -> println("Thanks for playing, exited the game");
-            default -> println("invalid option, try again");
+            case 3 -> userExperience.displayCell("Thanks for playing, exited the game\n");
+            default -> {
+                userExperience.displayCell("Invalid option, try again\n");
+                menu();
+            }
         }
     }
 
-    public static void showGame() {
-        println("Enter your nickname");
-        String nickname = reader.next();
-        boolean exit = false;
-        while (!exit) {
-            userExperience.title("Game Board");
-            String boardRepresentation = board.genereteBoardPrint();
-            println(boardRepresentation);
+    public void showGame() {
+        userExperience.displayCell("Name user");
+        userExperience.print("Enter your name: ");
+        String nickname = reader.nextLine();
+        showGameRecursive();
+    }
 
-            print("1. Poner tuberia\n" + "2. Simular\n" + "3. Exit\n");
+    public void showGameRecursive() {
+        String boardRepresentation = board.genereteBoardPrint();
+        userExperience.displayCell("\n" + "Game board\n" + "\n" + boardRepresentation);
+
+        String menuOptions = "1. Put Pipe\n" +
+                "2. Simulate\n" +
+                "3. Exit";
+        userExperience.displayCell(menuOptions);
+        userExperience.print("Enter an option: ");
+        int option = userExperience.validateInt();
+        switch (option) {
+            case 1 -> {
+                putPipe();
+                showGameRecursive();
+            }
+            case 2 -> {
+                evaluatePipe();
+                showGameRecursive();
+            }
+            case 3 -> {
+                userExperience.displayCell("Return to main menu\n");
+                menu();
+            }
+            default -> {
+                userExperience.displayCell("Invalid option, try again\n");
+                showGameRecursive();
+            }
+        }
+    }
+
+    public void putPipe() {
+
+        userExperience.displayCell("Enter the position of the pipe on the board\n");
+        userExperience.print("Position (row,column): ");
+        String input = reader.nextLine();
+        String errorMessage = userExperience.validateInput(input);
+
+        if (errorMessage != null) {
+            userExperience.printError(errorMessage);
+            putPipe();
+        } else {
+            String[] position = input.split(",");
+            int row = Integer.parseInt(position[0]);
+            int column = Integer.parseInt(position[1]);
+
+            userExperience.displayCell("Kind of pipes\n");
+            String menuOptions = "1. Horizontal pipe\n" +
+                    "2. Vertical pipe\n" +
+                    "3. Circular pipe\n" +
+                    "4. remove pipe";
+            userExperience.displayCell(menuOptions);
+            userExperience.print("Enter an option pipe: ");
             int option = userExperience.validateInt();
+            PipeType type = null;
             switch (option) {
-                case 1 -> putPipe();
-                case 2 -> evaluatePipe();
-                case 3 -> {
-                    println("Thanks for playing, exited the game");
-                    exit = true;
-                }
-                default -> println("invalid option, try again");
+                case 1 -> type = PipeType.HORIZONTAL;
+                case 2 -> type = PipeType.VERTICAL;
+                case 3 -> type = PipeType.ELBOW;
+                case 4 -> type = PipeType.X;
             }
 
-        }
-    }
-
-    public static void putPipe() {
-        println("Escriba la posicion en donde quiere ubicar el tablero:");
-        println("Escriba la fila");
-        int row = userExperience.validateInt();
-        println("Escriba la columna");
-        int column = userExperience.validateInt();
-        print("Elija el tipo de tuberia:\n");
-        print("1. Tuberia horizontal(=)\n" + "2. Tuberia vertical(||)\n" + "3. Tuberia circular(o)\n");
-        int option = userExperience.validateInt();
-        TypePipe type = null;
-        switch (option) {
-            case 1 -> type = TypePipe.HORIZONTAL;
-            case 2 -> type = TypePipe.VERTICAL;
-            case 3 -> type = TypePipe.CIRCULAR;
+            board.changePipe(column, row, type.toString());
         }
 
-        board.changePipe(column, row, type.toString());
     }
 
-    public static void showScore() {
-
-    }
-
-    public static void evaluatePipe() {
+    public void showScore() {
 
     }
 
-    public static void println(Object println) {
+    public void evaluatePipe() {
+
+    }
+
+    public void println(Object println) {
         System.out.println(println);
     }
 
-    public static void print(Object print) {
+    public void print(Object print) {
         System.out.print(print);
     }
 }

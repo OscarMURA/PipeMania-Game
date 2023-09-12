@@ -1,55 +1,94 @@
 package ui;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserExperience {
 
-	private static Scanner reader;
+	private Scanner reader;
 
 	public UserExperience() {
 		reader = new Scanner(System.in);
 	}
 
-	public void lines() {
-		System.out.println("\033[47;35m"
-				+ "\n\3\3------------\4\4------------\3\3------------\4\4------------\3\3------------\4\4------------\3\3\033[0m\n");
+	public void clearScreen() {
+		System.out.print("\033[H\033[2J"); // Limpia la pantalla
+		System.out.flush();
 	}
 
-	public void title(Object title) {
-		System.out.println("\t\033[47;35m \3 " + title + " \3 \033[0m \n");
+	public void displayCell(String content) {
+		String horizontalLine = "═".repeat(49);
+		System.out.println("╔" + horizontalLine + "╗");
+		String[] lines = content.split("\n");
+		for (String line : lines) {
+			System.out.println("║" + centerText(line, 49) + "║");
+		}
+		System.out.println("╚" + horizontalLine + "╝");
 	}
 
+	// valida los enteros
 	public int validateInt() {
 		int option = 0;
-		boolean validInput = false;
-		while (!validInput) {
-			try {
-				option = reader.nextInt();
-				validInput = true;
-			} catch (InputMismatchException e) {
-				reader.next();
-				System.out.println("\tInvalid number!");
-				System.out.print("\tConrrently Type: ");
-			}
+		if (reader.hasNextInt()) {
+			option = reader.nextInt();
+		} else {
+			reader.next();
+			printError("Invalid number!");
+			print("Enter the correct option: ");
+			option = validateInt();
 		}
 		return option;
 	}
 
-	public double validateDouble() {
-		double option = 0;
-		boolean validInput = false;
-		while (!validInput) {
-			try {
-				option = reader.nextDouble();
-				validInput = true;
-			} catch (InputMismatchException e) {
-				reader.next();
-				System.out.println("\tInvalid number!");
-				System.out.print("\tConrrently Type: ");
-			}
+	// centrar el texto
+	private String centerText(String text, int width) {
+		if (text.length() > width) {
+			width = text.length(); // Ajusta el ancho al tamaño del texto
 		}
-		return option;
+		int paddingSize = (width - text.length()) / 2;
+		String padding = " ".repeat(paddingSize);
+		if ((width - text.length()) % 2 == 1) {
+			// Si la longitud del texto y el ancho son diferentes en paridad, agrega un
+			// espacio extra al final
+			return padding + text + padding + " ";
+		} else {
+			return padding + text + padding;
+		}
 	}
 
+	// valida el formato de las coordenadas
+	public String validateInput(String input) {
+		String[] parts = input.split(",");
+		String errorMessage = null;
+
+		if (parts.length != 2) {
+			errorMessage = "Input must be: (number,number)";
+		} else if (!parts[0].matches("\\d+") || !parts[1].matches("\\d+")) {
+			errorMessage = "Both row and column must be numbers";
+		} else {
+			int row = Integer.parseInt(parts[0]);
+			int column = Integer.parseInt(parts[1]);
+
+			if (row < 0 || column < 0) {
+				errorMessage = "Both must be non-negative numbers";
+			}
+		}
+
+		return errorMessage;
+	}
+
+	public void print(String message) {
+		System.out.print(message);
+	}
+
+	public void println(String message) {
+		System.out.print(message);
+	}
+
+	public void printError(String message) {
+		displayCell("Error: " + message);
+	}
+
+	public void close() {
+		reader.close();
+	}
 }

@@ -76,11 +76,15 @@ public class Board {
 
     public String genereteBoardPrint() {
         StringBuilder out = new StringBuilder();
+        String cellFormat = "%-3s"; // Formato de celda con un ancho de 3 caracteres
+
         for (int i = 0; i < colum; i++) {
             for (int j = 0; j < row; j++) {
                 int position = this.colum * (i) + j;
                 Pipe pipe = (Pipe) (((DoubleLinkedList) board).get(position)).getContent();
-                out.append(pipe.getContent()).append("  ");
+                String cellContent = pipe.getContent();
+                String formattedCell = String.format(cellFormat, cellContent);
+                out.append(formattedCell);
             }
             out.append("\n");
         }
