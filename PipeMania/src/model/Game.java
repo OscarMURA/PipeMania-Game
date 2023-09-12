@@ -24,35 +24,40 @@ public class Game{
         return out;
     }
 
-    /*public String evaluatePipe(){
+    public String evaluatePipe(){
         String out;
-        if(board.evaluatePipe()){
+        if(board.validationPipes()){
             out = "funciona";
         }else{
             out = "No funciona";
         }
         return out;
-    }*/
+    }
 
     public String genereteBoardPrint(){
         return board.generateBoardPrint();
     }
 
-    /*
-    public boolean evaluatePipe(){
-        return board.evaluatePipe();
-    }*/
+    public boolean isWorkingPipeSystem(){
+        return board.validationPipes();
+    }
 
-    /*public String finishMatch(){
+    public String finishMatch(){
         String out;
-        if(board.evaluatePipe()){
-            actualPlayer.setMatch(board.genereteBoardPrint());
-            actualPlayer.setScore(calculateMatch);
-            out = actualPlayer.toString();
+        if(board.validationPipes()){
+            player.setMatch(board.generateBoardPrint());
+            //player.setScore(calculateMatch());
+            out = player.toString();
         }else{
             out = "No funciona";
         }
         return out;
+    }
+
+    /*public double calculateMatch(){
+        //Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
+        double score = (100 - board.usedPipes()) * 10 - (System.currentTimeMillis()-startTime);
+        return score;
     }*/
 
     public Player getPlayer(){

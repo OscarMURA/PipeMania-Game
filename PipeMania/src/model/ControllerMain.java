@@ -28,27 +28,18 @@ public class ControllerMain{
         return out;
     }
 
-    /*public String evaluatePipe(){
-
+    public String evaluatePipe(){
         return game.evaluatePipe();
-    }*/
+    }
 
-    /*public String finishMatch(){
+    public String finishMatch(){
         String out;
-        if(game.evaluatePipe()){
-            actualPlayer.setMatch(game.genereteBoardPrint());
-            actualPlayer.setScore(calculateMatch(game));
-            playersBST.add(game.getPlayer());
-            out = actualPlayer.toString();
+        if(game.isWorkingPipeSystem()){
+            out = game.getPlayer().toString();
         }else{
             out = "No funciona";
         }
         return out;
-    }*/
-
-    /*public double calculateMatch(Game game){
-        double score = (100 - game.usedPipes()) * 10 - (System.currentTimeMillis()-startTime)/1000;
-        return score;
-    }*/
+    }
 
 }
