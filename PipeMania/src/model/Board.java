@@ -242,6 +242,9 @@ public class Board {
 
     public void restartBoard(){
         restartBoard(0);
+        generateRandomSourceAndDrain(0, 0, 0, 0);
+
+
     }
 
     private void restartBoard(int index){
