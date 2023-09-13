@@ -40,6 +40,7 @@ public class ControllerMain{
         String out;
         if(game.isWorkingPipeSystem()){
             out = game.getPlayer().toString();
+            playersBST.add(game.getPlayer());
         }else{
             out = "No funciona";
         }
