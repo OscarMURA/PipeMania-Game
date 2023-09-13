@@ -1,18 +1,18 @@
 package ui;
 
+import model.ControllerMain;
 import model.PipeType;
 import java.util.Scanner;
-import model.Board;
 
 public class PipeMania {
     private UserExperience userExperience;
     private Scanner reader;
-    private Board board;
+    private ControllerMain controller;
 
     public PipeMania() {
         reader = new Scanner(System.in);
         userExperience = new UserExperience();
-        board = new Board(8, 8);
+        controller = new ControllerMain();
     }
 
     public static void main(String[] args) {
@@ -46,11 +46,11 @@ public class PipeMania {
         userExperience.displayCell("Name user");
         userExperience.print("Enter your name: ");
         String nickname = reader.nextLine();
-        showGameRecursive();
+        showGameRecursive(nickname);
     }
 
-    public void showGameRecursive() {
-        String boardRepresentation = board.genereteBoardPrint();
+    public void showGameRecursive(String nickname) {
+        String boardRepresentation = controller.initGame(nickname);
         userExperience.displayCell("\n" + "Game board\n" + "\n" + boardRepresentation);
 
         String menuOptions = "1. Put Pipe\n" +
@@ -62,11 +62,11 @@ public class PipeMania {
         switch (option) {
             case 1 -> {
                 putPipe();
-                showGameRecursive();
+                showGameRecursive(nickname);
             }
             case 2 -> {
                 evaluatePipe();
-                showGameRecursive();
+                showGameRecursive(nickname);
             }
             case 3 -> {
                 userExperience.displayCell("Return to main menu\n");
@@ -74,7 +74,7 @@ public class PipeMania {
             }
             default -> {
                 userExperience.displayCell("Invalid option, try again\n");
-                showGameRecursive();
+                showGameRecursive(nickname);
             }
         }
     }
@@ -110,7 +110,7 @@ public class PipeMania {
                 case 4 -> type = PipeType.X;
             }
 
-            board.changePipe(column, row, type.toString());
+            controller.putPipe(type.toString(), row, column);
         }
 
     }
