@@ -18,9 +18,13 @@ public class ControllerMain{
 
     public String putPipe(String pipe, int x, int y){
         String out;
+        if(pipe.equals("x")){
+            pipe = "X";
+        }
+
         if(x>7 || x<0 || y>7 || y<0){
             out = "\n" + "No se pudo, indice invalido";
-        }else if(!pipe.equals("||") && !pipe.equals("=") && !pipe.equals("o")){
+        }else if(!pipe.equals("||") && !pipe.equals("=") && !pipe.equals("o") && !pipe.equals("X")){
             out = "Invalida opcion de tubería";
         }else{
             out = game.putPipe(pipe, x, y);
@@ -28,27 +32,19 @@ public class ControllerMain{
         return out;
     }
 
-    /*public String evaluatePipe(){
-
+    public String evaluatePipe(){
         return game.evaluatePipe();
-    }*/
+    }
 
-    /*public String finishMatch(){
+    public String finishMatch(){
         String out;
-        if(game.evaluatePipe()){
-            actualPlayer.setMatch(game.genereteBoardPrint());
-            actualPlayer.setScore(calculateMatch(game));
+        if(game.isWorkingPipeSystem()){
+            out = game.getPlayer().toString();
             playersBST.add(game.getPlayer());
-            out = actualPlayer.toString();
         }else{
             out = "No funciona";
         }
         return out;
-    }*/
-
-    /*public double calculateMatch(Game game){
-        double score = (100 - game.usedPipes()) * 10 - (System.currentTimeMillis()-startTime)/1000;
-        return score;
-    }*/
+    }
 
 }
