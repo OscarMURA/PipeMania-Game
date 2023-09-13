@@ -43,6 +43,8 @@ import java.util.Scanner;
 
             }while(x!=-1);
             System.out.println(board.validationPipes());
+
+            scanner.close();
         }
     }
 
