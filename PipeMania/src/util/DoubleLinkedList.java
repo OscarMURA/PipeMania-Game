@@ -78,7 +78,7 @@ public class DoubleLinkedList<T> extends Collections{
 		numItems++;
 	}
 
-	public NodeDouble<T> get(int index){
+	public T get(int index){
 		NodeDouble<T> node;
 		if(index>=numItems){
 			node = null;
@@ -88,7 +88,7 @@ public class DoubleLinkedList<T> extends Collections{
 			node = first.get(index);
 		}
 		
-		return node;
+		return node.getContent();
 	}
 
 	public void set(int index, Object object){

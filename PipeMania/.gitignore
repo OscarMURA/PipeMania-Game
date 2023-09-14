@@ -59,6 +59,9 @@ out/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+PipeMania/.idea/workspace.xml
+*.xml
+
 #visual parading
  ../doc/Integrative task 1.vpp.bak_001d
 
