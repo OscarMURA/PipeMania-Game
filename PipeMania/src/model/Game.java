@@ -1,14 +1,14 @@
 package model;
 
-public class Game{
+public class Game {
     private Board board;
     private Player player;
     private long startTime;
 
-    public Game(){
+    public Game() {
     }
 
-    public String initGame(String name){
+    public String initGame(String name) {
         this.board = null;
         this.board = new Board(8, 8);
         this.player = null;
@@ -17,50 +17,57 @@ public class Game{
         return board.generateBoardPrint();
     }
 
-    public String putPipe(String pipe, int x, int y){
+    public String putPipe(String pipe, int x, int y) {
         String out;
         board.changePipe(x, y, pipe);
         out = board.generateBoardPrint();
         return out;
     }
 
-    public String evaluatePipe(){
+    public String evaluatePipe() {
         String out;
-        if(board.validationPipes()){
+        if (board.validationPipes()) {
             out = "funciona";
-        }else{
+        } else {
             out = "No funciona";
         }
         return out;
     }
 
-    public String genereteBoardPrint(){
+    public String genereteBoardPrint() {
         return board.generateBoardPrint();
     }
 
-    public boolean isWorkingPipeSystem(){
+    public boolean isWorkingPipeSystem() {
         return board.validationPipes();
     }
 
-    public String finishMatch(){
+    public String finishMatch() {
         String out;
-        if(board.validationPipes()){
+        if (board.validationPipes()) {
             player.setMatch(board.generateBoardPrint());
-            //player.setScore(calculateMatch());
+            // player.setScore(calculateMatch());
             out = player.toString();
-        }else{
+        } else {
             out = "No funciona";
         }
         return out;
     }
 
-    /*public double calculateMatch(){
-        //Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
-        double score = (100 - board.usedPipes()) * 10 - (System.currentTimeMillis()-startTime);
-        return score;
-    }*/
+    /*
+     * public double calculateMatch(){
+     * //Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
+     * double score = (100 - board.usedPipes()) * 10 -
+     * (System.currentTimeMillis()-startTime);
+     * return score;
+     * }
+     */
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
+    }
+
+    public String getCurrentBoardState() {
+        return board.generateBoardPrint();
     }
 }

@@ -46,4 +46,12 @@ public class ControllerMain {
         return out;
     }
 
+    public String getCurrentBoardState() {
+        if (game != null) {
+            return game.getCurrentBoardState();
+        } else {
+            return "No game in progress.";
+        }
+    }
+
 }

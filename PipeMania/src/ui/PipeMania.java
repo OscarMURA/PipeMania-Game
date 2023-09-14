@@ -2,20 +2,16 @@ package ui;
 
 import model.ControllerMain;
 import java.util.Scanner;
-import model.Board;
 
 public class PipeMania {
     private UserExperience userExperience;
     private Scanner reader;
     private ControllerMain controller;
-    private Board board;
 
     public PipeMania() {
         reader = new Scanner(System.in);
         userExperience = new UserExperience();
         controller = new ControllerMain();
-        board = new Board(8, 8);
-
     }
 
     public static void main(String[] args) {
@@ -49,11 +45,12 @@ public class PipeMania {
         userExperience.displayCell("Name user");
         userExperience.print("Enter your name: ");
         String nickname = reader.nextLine();
+        controller.initGame(nickname);
         showGameRecursive(nickname);
     }
 
     public void showGameRecursive(String nickname) {
-        String boardRepresentation = board.generateBoardPrint();
+        String boardRepresentation = controller.getCurrentBoardState();
         userExperience.displayCell("\n" + "Game board\n" + "\n" + boardRepresentation);
 
         String menuOptions = "1. Put Pipe\n" +
@@ -113,7 +110,8 @@ public class PipeMania {
                 case 4 -> type = "X";
             }
 
-            board.changePipe(column, row, type);
+            String message = controller.putPipe(type, column, row);
+            System.out.println(message);
         }
     }
 
