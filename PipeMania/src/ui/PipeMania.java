@@ -1,18 +1,21 @@
 package ui;
 
 import model.ControllerMain;
-import model.PipeType;
 import java.util.Scanner;
+import model.Board;
 
 public class PipeMania {
     private UserExperience userExperience;
     private Scanner reader;
     private ControllerMain controller;
+    private Board board;
 
     public PipeMania() {
         reader = new Scanner(System.in);
         userExperience = new UserExperience();
         controller = new ControllerMain();
+        board = new Board(8, 8);
+
     }
 
     public static void main(String[] args) {
@@ -50,7 +53,7 @@ public class PipeMania {
     }
 
     public void showGameRecursive(String nickname) {
-        String boardRepresentation = controller.initGame(nickname);
+        String boardRepresentation = board.generateBoardPrint();
         userExperience.displayCell("\n" + "Game board\n" + "\n" + boardRepresentation);
 
         String menuOptions = "1. Put Pipe\n" +
@@ -102,17 +105,16 @@ public class PipeMania {
             userExperience.displayCell(menuOptions);
             userExperience.print("Enter an option pipe: ");
             int option = userExperience.validateInt();
-            PipeType type = null;
+            String type = " ";
             switch (option) {
-                case 1 -> type = PipeType.HORIZONTAL;
-                case 2 -> type = PipeType.VERTICAL;
-                case 3 -> type = PipeType.ELBOW;
-                case 4 -> type = PipeType.X;
+                case 1 -> type = "=";
+                case 2 -> type = "||";
+                case 3 -> type = "o";
+                case 4 -> type = "X";
             }
 
-            controller.putPipe(type.toString(), row, column);
+            board.changePipe(column, row, type);
         }
-
     }
 
     public void showScore() {
@@ -120,7 +122,7 @@ public class PipeMania {
     }
 
     public void evaluatePipe() {
-
+        controller.evaluatePipe();
     }
 
     public void println(Object println) {
