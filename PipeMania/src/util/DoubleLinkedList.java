@@ -3,7 +3,7 @@ package util;
 /**
  * The DoubleLinkedList class is a subclass of the Collections class.
  */
-public class DoubleLinkedList<T> extends Collections{
+public class DoubleLinkedList<T> extends Collections<T>{
 
 
 	// The `public DoubleLinkedList()` constructor initializes a new instance of the `DoubleLinkedList`
@@ -87,8 +87,8 @@ public class DoubleLinkedList<T> extends Collections{
 	 * @param n The parameter `n` is of type `Object` and represents the element to be added to the list.
 	 */
 	@Override
-	public void add(Object n) {
-		T t=(T)(n);
+	public void add(T n) {
+		T t= n;
 		NodeDouble<T> newNode= new NodeDouble<>(t);
 		
 		if(last == null) {
@@ -107,9 +107,10 @@ public class DoubleLinkedList<T> extends Collections{
 	 * 
 	 * @param index The index parameter represents the position of the node that we want to retrieve from
 	 * the linked list.
-	 * @return The method is returning a NodeDouble<T> object.
+	 * @return The method is returning a T object.
 	 */
-	public NodeDouble<T> get(int index){
+
+	public T get(int index){
 		NodeDouble<T> node;
 		if(index>=numItems){
 			node = null;
@@ -119,7 +120,7 @@ public class DoubleLinkedList<T> extends Collections{
 			node = first.get(index);
 		}
 		
-		return node;
+		return node.getContent();
 	}
 
 	/**

@@ -21,7 +21,7 @@ public abstract class Collections<T> {
      * @param o The parameter "o" is of type Object, which means it can accept any type of object as an
      * argument.
      */
-    public abstract void add(Object o);
+    public abstract void add(T o);
     
     /**
     * The function checks if a data structure is empty.

@@ -107,7 +107,7 @@ public class Game{
      */
     public double calculateMatch(){
         //Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
-        double score = (100 - board.usedPipes()) * 10 - (System.currentTimeMillis()-startTime);
+        double score = (100 - board.accountUsedPipes()) * 10 - (System.currentTimeMillis()-startTime)/1000;
         return score;
     }
 
