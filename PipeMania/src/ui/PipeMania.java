@@ -53,8 +53,7 @@ public class PipeMania {
 
     public void showGameRecursive(String nickname) {
         String boardRepresentation = controller.getCurrentBoardState();
-        userExperience.displayCell("\n" + "Game board\n" + "\n" + boardRepresentation);
-
+        userExperience.displayCell("\n" + "\u001B[31m" + "Game board" + "\u001B[0m\n" + "\n" + boardRepresentation);
         String menuOptions = "1. Put Pipe\n" +
                 "2. Simulate\n" +
                 "3. Exit";
@@ -67,7 +66,8 @@ public class PipeMania {
                 showGameRecursive(nickname);
             }
             case 2 -> {
-                evaluatePipe();
+                String result = evaluatePipe();
+                userExperience.displayCell(result);
                 showGameRecursive(nickname);
             }
             case 3 -> {
