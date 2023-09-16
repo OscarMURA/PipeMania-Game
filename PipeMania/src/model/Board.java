@@ -365,9 +365,29 @@ public class Board {
         } else if (j >= row) {
             result = generateBoardPrintRecursively(i + 1, 0, out + "\n");
         } else {
+            if (i == 0 && j == 0) {
+                out += "\u001B[33mY\u001B[0m/\u001B[33mX\u001B[0m";
+                for (int k = 0; k < row; k++) {
+                    out += "\u001B[33m" + String.format("%2d", k) + "\u001B[0m "; // Cambiar color de índices a amarillo
+                }
+                out += "\n";
+            }
+            if (j == 0) {
+                out += "\u001B[33m" + String.format("%2d", i) + "\u001B[0m "; // Cambiar color de índices a amarillo
+            }
             int position = colum * i + j;
-            Pipe pipe = (board).get(position);
-            result = generateBoardPrintRecursively(i, j + 1, out + pipe.getContent() + " ");
+            Pipe pipe = board.get(position);
+            String content = pipe.getContent();
+            if ("F".equals(content)) {
+                content = "\u001B[38;5;82m F\u001B[0m"; // Cambiar color de F a verde y agregar espacio
+            } else if ("D".equals(content)) {
+                content = "\u001B[38;5;208m D\u001B[0m"; // Cambiar color de D a azul y agregar espacio
+            } else if ("X".equals(content)) {
+                content = "\u001B[38;5;33m X\u001B[0m"; // Cambiar color de X a azul y agregar espacio
+            } else {
+                content = String.format("%2s", content);
+            }
+            result = generateBoardPrintRecursively(i, j + 1, out + content + " ");
         }
         return result;
     }
