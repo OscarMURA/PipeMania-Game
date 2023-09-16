@@ -35,7 +35,7 @@ import java.util.Scanner;
             p7.setScore(149);
             p7.setMatch("match7");
             lista.add(p7);
-            System.out.println(lista.getRanking());
+            System.out.println(lista.getRanking(4));
 
             Scanner scanner=new Scanner(System.in);
             int x;int y;

@@ -98,6 +98,6 @@ public class ControllerMain{
      * @return The method is returning a String value.
      */
     public String getRanking(){
-		return "Ranking:\n" + playersBST.getRanking();
+		return "Ranking:\n" + playersBST.getRanking(4);
 	}
 }

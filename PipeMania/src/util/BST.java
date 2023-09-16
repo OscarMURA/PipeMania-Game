@@ -123,7 +123,7 @@ public class BST <T extends Comparable<T>>  extends Collections{
  * 
  * @return The method is returning a string representation of the ranking.
  */
-    public String getRanking() {
+    /*public String getRanking() {
         String ranking = "";
     
         int[] currentPosition = {1};
@@ -143,6 +143,18 @@ public class BST <T extends Comparable<T>>  extends Collections{
         ranking += getRankingInString(root, currentPosition, 5);
         
         return ranking;
+    }
+    */
+
+    public String getRanking(int podio){
+        String out;
+        if(podio == -1){
+            out = ""; //don't do anything
+        }else{
+            int currentPosition[] = {0};
+            out = getRanking(podio-1) + getRankingInString(root, currentPosition, podio);
+        }
+        return out;
     }
     
     
@@ -169,7 +181,7 @@ public class BST <T extends Comparable<T>>  extends Collections{
     
             // Mostramos el jugador actual y su puntaje solo si es la posición deseada
             if (currentPosition[0] == targetPosition) {
-                out += currentPosition[0] + ". " + currentNode.getContent().toString() + "\n";
+                out += currentPosition[0] + 1 + ". " + currentNode.getContent().toString() + "\n";
             }
     
             // Incrementamos la posición actual
