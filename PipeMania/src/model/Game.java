@@ -27,9 +27,9 @@ public class Game {
     public String evaluatePipe() {
         String out;
         if (board.validationPipes()) {
-            out = "funciona";
+            out = "La solución es correcta";
         } else {
-            out = "No funciona";
+            out = "La tubería no funciona";
         }
         return out;
     }
