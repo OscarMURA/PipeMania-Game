@@ -35,7 +35,9 @@ public class PipeMania {
             case 2 -> showScore();
             case 3 -> userExperience.displayCell("Thanks for playing, exited the game\n");
             default -> {
+                println("\u001B[31m"); // Cambiar el color del texto a rojo
                 userExperience.displayCell("Invalid option, try again\n");
+                println("\u001B[0m"); // Restablecer el color del texto a su valor predeterminado
                 menu();
             }
         }
@@ -73,7 +75,9 @@ public class PipeMania {
                 menu();
             }
             default -> {
+                println("\u001B[31m"); // Cambiar el color del texto a rojo
                 userExperience.displayCell("Invalid option, try again\n");
+                println("\u001B[0m"); // Restablecer el color del texto a su valor predeterminado
                 showGameRecursive(nickname);
             }
         }
@@ -119,8 +123,8 @@ public class PipeMania {
 
     }
 
-    public void evaluatePipe() {
-        controller.evaluatePipe();
+    public String evaluatePipe() {
+        return controller.evaluatePipe();
     }
 
     public void println(Object println) {

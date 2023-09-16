@@ -20,7 +20,9 @@ public class UserExperience {
 		System.out.println("╔" + horizontalLine + "╗");
 		String[] lines = content.split("\n");
 		for (String line : lines) {
-			System.out.println("║" + centerText(line, 49) + "║");
+			String ansiCode = "\u001B\\[[;\\d]*m";
+			String lineWithoutAnsi = line.replaceAll(ansiCode, "");
+			System.out.println("║" + centerText(line, 49) + "║"); // Imprimir la línea original
 		}
 		System.out.println("╚" + horizontalLine + "╝");
 	}
@@ -41,12 +43,14 @@ public class UserExperience {
 
 	// centrar el texto
 	private String centerText(String text, int width) {
-		if (text.length() > width) {
-			width = text.length(); // Ajusta el ancho al tamaño del texto
+		String ansiCode = "\u001B\\[[;\\d]*m";
+		String textWithoutAnsi = text.replaceAll(ansiCode, "");
+		if (textWithoutAnsi.length() > width) {
+			width = textWithoutAnsi.length(); // Ajusta el ancho al tamaño del texto
 		}
-		int paddingSize = (width - text.length()) / 2;
+		int paddingSize = (width - textWithoutAnsi.length()) / 2;
 		String padding = " ".repeat(paddingSize);
-		if ((width - text.length()) % 2 == 1) {
+		if ((width - textWithoutAnsi.length()) % 2 == 1) {
 			// Si la longitud del texto y el ancho son diferentes en paridad, agrega un
 			// espacio extra al final
 			return padding + text + padding + " ";
@@ -85,7 +89,9 @@ public class UserExperience {
 	}
 
 	public void printError(String message) {
+		println("\u001B[31m");
 		displayCell("Error: " + message);
+		println("\u001B[0m"); // Restablecer el color del texto a su valor predeterminado
 	}
 
 	public void close() {

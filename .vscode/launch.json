@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PipeMania",
+            "request": "launch",
+            "mainClass": "ui.PipeMania",
+            "projectName": "tarea-integradora-1-2023-2-e9_71d95038"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "model.Main",
