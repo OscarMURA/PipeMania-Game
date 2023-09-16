@@ -117,35 +117,15 @@ public class BST <T extends Comparable<T>>  extends Collections{
         return root==null;
     }
 
-/**
- * The function `getRanking()` returns a string representation of the rankings of the nodes in a binary
- * tree.
- * 
- * @return The method is returning a string representation of the ranking.
- */
-    /*public String getRanking() {
-        String ranking = "";
-    
-        int[] currentPosition = {1};
-
-        ranking += getRankingInString(root, currentPosition, 1);
-        currentPosition[0] = 1;
-
-        ranking += getRankingInString(root, currentPosition, 2);
-        currentPosition[0] = 1;
-
-        ranking += getRankingInString(root, currentPosition, 3);
-        currentPosition[0] = 1;
-
-        ranking += getRankingInString(root, currentPosition, 4);
-        currentPosition[0] = 1;
-        
-        ranking += getRankingInString(root, currentPosition, 5);
-        
-        return ranking;
-    }
-    */
-
+    /**
+     * The function recursively generates a ranking string based on a given position in the ranking.
+     * 
+     * @param podio The parameter "podio" represents the position in the ranking that we want to
+     * retrieve. If "podio" is -1, it means that we don't want to retrieve any position and the method
+     * should return an empty string. Otherwise, the method recursively calls itself to retrieve the
+     * ranking up to
+     * @return The method is returning a String value.
+     */
     public String getRanking(int podio){
         String out;
         if(podio == -1){
