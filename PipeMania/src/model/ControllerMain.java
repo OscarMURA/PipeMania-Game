@@ -92,4 +92,12 @@ public class ControllerMain{
         return out;
     }
 
+    /**
+     * The function returns the ranking of players in a binary search tree.
+     * 
+     * @return The method is returning a String value.
+     */
+    public String getRanking(){
+		return "Ranking:\n" + playersBST.getRanking();
+	}
 }

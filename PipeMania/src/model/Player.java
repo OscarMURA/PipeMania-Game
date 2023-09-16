@@ -94,4 +94,8 @@ public class Player implements Comparable<Player>{
         score + ", match:\n" + match + "\n";
     }
 
+    public void setNickName(String name){
+        this.nickName = name;
+    }
+
 }

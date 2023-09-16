@@ -201,4 +201,5 @@ public class DoubleLinkedList<T> extends Collections<T>{
 	public int getNumItems(){
 		return numItems;
 	}
+
 }
