@@ -21,10 +21,8 @@ public class ControllerMain {
         if (pipe.equals("x")) {
             pipe = "X";
         }
-        if (x > 7 || x < 0 || y > 7 || y < 0) {
-            out = "\n" + "No se pudo, indice invalido";
-        } else if (!pipe.equals("||") && !pipe.equals("=") && !pipe.equals("o") && !pipe.equals("X")) {
-            out = "Invalida opcion de tubería";
+        if (!pipe.equals("||") && !pipe.equals("=") && !pipe.equals("o") && !pipe.equals("X")) {
+            out = "Opción inválida de tubería";
         } else {
             out = game.putPipe(pipe, x, y);
         }
