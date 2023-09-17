@@ -74,27 +74,6 @@ public class BST<T extends Comparable<T>> extends Collections {
     }
 
     /**
-     * The function returns a string representation of the in-order traversal of a
-     * binary tree using
-     * the toString() method.
-     * 
-     * @return The method is returning a String.
-     */
-    public String inOrdenWithToString() {
-        return inOrdenWithToString(root);
-    }
-
-    private String inOrdenWithToString(BSTNode<T> current) {
-        String result = "";
-        if (current != null) {
-            result += inOrdenWithToString(current.getLeft());
-            result += "* " + current.getContent().toString() + "\n";
-            result += inOrdenWithToString(current.getRight());
-        }
-        return result;
-    }
-
-    /**
      * The function returns the maximum value in a binary tree.
      * 
      * @return The method is returning the maximum value in the binary tree.
