@@ -1,46 +1,58 @@
 package util;
 
 /**
- * The BSTNode class represents a node in a binary search tree, storing a value of type T and
+ * The BSTNode class represents a node in a binary search tree, storing a value
+ * of type T and
  * references to its parent, left child, and right child.
  */
-public class BSTNode<T extends  Comparable<T>> implements Node {
+public class BSTNode<T extends Comparable<T>> implements Node {
 
-    /**The line `private T value;` is declaring a private instance variable `value` of type `T`. The
-     type `T` is a generic type parameter that represents the type of value that will be stored in
-     the node. By using a generic type parameter, the `BSTNode` class can be used to store values of
-     any type that implements the `Comparable` interface. */ 
+    /**
+     * The line `private T value;` is declaring a private instance variable `value`
+     * of type `T`. The
+     * type `T` is a generic type parameter that represents the type of value that
+     * will be stored in
+     * the node. By using a generic type parameter, the `BSTNode` class can be used
+     * to store values of
+     * any type that implements the `Comparable` interface.
+     */
     private T value;
-<<<<<<< HEAD
-    /**The line `private BSTNode<T> parent;` is declaring a private instance variable `parent` of type
-    BSTNode<T>`. This variable represents the parent node of the current node in a binary search
-     tree. It is used to maintain the hierarchical relationship between nodes in the tree. */ 
+    /**
+     * The line `private BSTNode<T> parent;` is declaring a private instance
+     * variable `parent` of type
+     * BSTNode<T>`. This variable represents the parent node of the current node in
+     * a binary search
+     * tree. It is used to maintain the hierarchical relationship between nodes in
+     * the tree.
+     */
     private BSTNode<T> parent;
-    /**The line `private BSTNode<T> left;` is declaring a private instance variable `left` of type*/
+    /**
+     * The line `private BSTNode<T> left;` is declaring a private instance variable
+     * `left` of type
+     */
     private int size;
 
-    
-    /** The line `private BSTNode<T> left;` is declaring a private instance variable `left` of type
-    `BSTNode<T>`. This variable represents the left child node of the current node in a binary
-     search tree. It is used to maintain the hierarchical relationship between nodes in the tree*/ 
-    private BSTNode <T> left;
+    /**
+     * The line `private BSTNode<T> left;` is declaring a private instance variable
+     * `left` of type
+     * `BSTNode<T>`. This variable represents the left child node of the current
+     * node in a binary
+     * search tree. It is used to maintain the hierarchical relationship between
+     * nodes in the tree
+     */
+    private BSTNode<T> left;
 
+    /**
+     * The line `private BSTNode<T> right;` is declaring a private instance variable
+     * `right` of type
+     * `BSTNode<T>`. This variable represents the right child node of the current
+     * node in a binary
+     * search tree. It is used to maintain the hierarchical relationship between
+     * nodes in the tree.
+     */
+    private BSTNode<T> right;
 
-    /**The line `private BSTNode<T> right;` is declaring a private instance variable `right` of type
-    `BSTNode<T>`. This variable represents the right child node of the current node in a binary
-     search tree. It is used to maintain the hierarchical relationship between nodes in the tree. */ 
-    private BSTNode <T> right;
-=======
-    private BSTNode parent;
-    private int size;
-
-    private BSTNode left;
-
-
-    private BSTNode right;
->>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
-
-    private BSTNode <T> dad;
+    private BSTNode<T> dad;
 
     public BSTNode(Object value) {
         this.value = (T) value;
@@ -49,16 +61,13 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.dad = null;
     }
 
-<<<<<<< HEAD
     /**
      * The function returns the parent node of a binary search tree node.
      * 
-     * @return The method is returning the parent node of the current node in a binary search tree.
+     * @return The method is returning the parent node of the current node in a
+     *         binary search tree.
      */
     public BSTNode<T> getParent() {
-=======
-    public BSTNode getParent() {
->>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         return parent;
     }
 
@@ -71,17 +80,14 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         return size;
     }
 
-<<<<<<< HEAD
     /**
      * The function sets the parent of a binary search tree node.
      * 
-     * @param parent The parent parameter is of type BSTNode<T>, which represents the parent node of
-     * the current node in a binary search tree.
+     * @param parent The parent parameter is of type BSTNode<T>, which represents
+     *               the parent node of
+     *               the current node in a binary search tree.
      */
     public void setParent(BSTNode<T> parent) {
-=======
-    public void setParent(BSTNode parent) {
->>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         this.parent = parent;
     }
 
@@ -97,15 +103,15 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
     /**
      * The function sets the value of a variable to the input parameter.
      * 
-     * @param p The parameter "p" is of type Object, which means it can accept any type of object as an
-     * argument.
+     * @param p The parameter "p" is of type Object, which means it can accept any
+     *          type of object as an
+     *          argument.
      */
     @Override
     public void setContent(Object p) {
         this.value = (T) p;
     }
 
-<<<<<<< HEAD
     /**
      * The function returns the left child of a binary search tree node.
      * 
@@ -121,32 +127,26 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      * @return The right child node of the current node in a binary search tree.
      */
     public BSTNode<T> getRight() {
-=======
-    public BSTNode getLeft() {
-        return this.left;
-    }
-
-    public BSTNode getRight() {
->>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         return this.right;
     }
 
     /**
      * The function sets the value of a variable.
      * 
-     * @param value The parameter "value" is of type T, which means it can be any type specified when
-     * the method is called.
+     * @param value The parameter "value" is of type T, which means it can be any
+     *              type specified when
+     *              the method is called.
      */
     public void setValue(T value) {
         this.value = value;
     }
 
-<<<<<<< HEAD
     /**
      * The function sets the left child of a binary search tree node.
      * 
-     * @param left The parameter "left" is of type BSTNode<T>, which represents the left child of a
-     * binary search tree node.
+     * @param left The parameter "left" is of type BSTNode<T>, which represents the
+     *             left child of a
+     *             binary search tree node.
      */
     public void setLeft(BSTNode<T> left) {
         this.left = left;
@@ -155,26 +155,20 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
     /**
      * The function sets the right child of a binary search tree node.
      * 
-     * @param right The "right" parameter is of type BSTNode<T>, which represents the right child of a
-     * binary search tree node.
+     * @param right The "right" parameter is of type BSTNode<T>, which represents
+     *              the right child of a
+     *              binary search tree node.
      */
     public void setRight(BSTNode<T> right) {
-=======
-    public void setLeft(BSTNode left) {
-        this.left = left;
-    }
-
-    public void setRight(BSTNode right) {
->>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         this.right = right;
     }
 
-    public BSTNode<T> getDad(){
+    public BSTNode<T> getDad() {
         return dad;
     }
 
-    public void setDad(BSTNode<T> dad){
+    public void setDad(BSTNode<T> dad) {
         this.dad = dad;
-    } 
+    }
 
 }
