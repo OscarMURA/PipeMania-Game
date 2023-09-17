@@ -101,7 +101,7 @@ public class Game {
         String out;
         if (board.validationPipes()) {
             player.setMatch(board.generateBoardPrint());
-            // player.setScore(calculateMatch());
+            player.setScore(calculateMatch());
             out = player.toString();
         } else {
             out = "No funciona";

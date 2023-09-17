@@ -97,6 +97,7 @@ public class ControllerMain {
     public String finishMatch() {
         String out;
         if (game.isWorkingPipeSystem()) {
+            game.finishMatch();
             out = game.getPlayer().toString();
             playersBST.add(game.getPlayer());
         } else {
