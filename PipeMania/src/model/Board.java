@@ -24,7 +24,7 @@ public class Board {
      * `private`, which means it
      * can only be accessed within the `Board` class.
      */
-    private int colum;
+    private int colums;
 
     /**
      * is declaring a public instance variable named `row` of type `int`.
@@ -32,12 +32,12 @@ public class Board {
      * store the number
      * of rows in the board
      */
-    public int row;
+    public int rows;
 
     /** This var is for save the position the Drains Pipes */
-    public int finaL;
+    public int finalPosDrain;
     /** This var is for save the position the sources Pipes */
-    public int init;
+    public int initPosSource;
 
     /**
      * board is declaring a private instance variable named
@@ -59,8 +59,8 @@ public class Board {
      * rows in the board, respectively
      */
     public Board(int colum, int row) {
-        this.colum = colum;
-        this.row = row;
+        this.colums = colum;
+        this.rows = row;
         rd = new Random();
         initBoard();
     }
@@ -71,7 +71,7 @@ public class Board {
      * @return The method is returning the value of the variable "colum".
      */
     public int getColum() {
-        return colum;
+        return colums;
     }
 
     /**
@@ -80,12 +80,12 @@ public class Board {
      * @return The method is returning the value of the variable "row".
      */
     public int getRow() {
-        return row;
+        return rows;
     }
 
     private void initBoard() {
         board = new DoubleLinkedList<Pipe>();
-        int amountNode = colum * row;
+        int amountNode = colums * rows;
         board = addPipe(amountNode, board);
         generateRandomSourceAndDrain(0, 0, 0, 0);
     }
@@ -124,22 +124,22 @@ public class Board {
      */
     private void generateRandomSourceAndDrain(int rowSource, int columSource, int rowDrain, int columDrain) {
         if (!(Math.abs(rowSource - rowDrain) + Math.abs(columSource - columDrain) < 4)) {
-            int PositionSource = this.colum * (columSource - 1) + rowSource - 1;
-            int PositionDrain = this.colum * (columDrain - 1) + rowDrain - 1;
+            int PositionSource = this.colums * (columSource - 1) + rowSource - 1;
+            int PositionDrain = this.colums * (columDrain - 1) + rowDrain - 1;
             // Añado las posiciones de las tuberias
             // y la fuente es el primero
-            this.init = PositionSource;
-            this.finaL = PositionDrain;
+            this.initPosSource = PositionSource;
+            this.finalPosDrain = PositionDrain;
 
             Pipe source = board.get(PositionSource);
             Pipe drain = board.get(PositionDrain);
             source.setContent("F");
             drain.setContent("D");
         } else {
-            rowSource = rd.nextInt(row) + 1;
-            columSource = rd.nextInt(colum) + 1;
-            rowDrain = rd.nextInt(row) + 1;
-            columDrain = rd.nextInt(colum) + 1;
+            rowSource = rd.nextInt(rows) + 1;
+            columSource = rd.nextInt(colums) + 1;
+            rowDrain = rd.nextInt(rows) + 1;
+            columDrain = rd.nextInt(colums) + 1;
 
             generateRandomSourceAndDrain(rowSource, columSource, rowDrain, columDrain);
         }
@@ -163,7 +163,7 @@ public class Board {
         if (pipe.equalsIgnoreCase("X") || pipe.equalsIgnoreCase("||") || pipe.equalsIgnoreCase("=")
                 || pipe.equalsIgnoreCase("o")) {
 
-            int position = this.colum * (colum) + row;
+            int position = this.colums * (colum) + row;
             Pipe pipe1 = board.get(position);
 
             if (!pipe1.getType().equals(PipeType.F) && !pipe1.getType().equals(PipeType.D))
@@ -181,8 +181,8 @@ public class Board {
     public boolean validationPipes() {
 
         boolean result = false;
-        int posCurrent = this.init;
-        Pipe current = (board).get(init);
+        int posCurrent = this.initPosSource;
+        Pipe current = (board).get(initPosSource);
         Pipe aux = new Pipe();
         aux.setVisit(TypeVisit.VISITED);
         current.setVisit(TypeVisit.VISITED);
@@ -203,17 +203,17 @@ public class Board {
     private boolean validationPipesRecursively(int posCurrent, Pipe last, Pipe current) {
         boolean result;
         int pos = -1;
-        if (posCurrent == finaL) {
+        if (posCurrent == finalPosDrain) {
             result = true;
 
         } else {
 
             boolean pipeNextDown = false, pipeNextUp = false, pipeNextRight = false, pipeNextLeft = false;
             Pipe pipeDown = null, pipeUp = null, pipeRigh = null, pipeLeft = null;
-            int posDown = posCurrent + colum, posUp = posCurrent - colum, posRight = posCurrent + 1,
+            int posDown = posCurrent + colums, posUp = posCurrent - colums, posRight = posCurrent + 1,
                     posLeft = posCurrent - 1;
 
-            if (posDown < colum * row) {// Do not leave the board
+            if (posDown < colums * rows) {// Do not leave the board
                 pipeDown = (board).get(posDown);
                 pipeNextDown = pipeNextIsUpOrDown(last, current, pipeDown);
 
@@ -223,11 +223,11 @@ public class Board {
                 pipeNextUp = pipeNextIsUpOrDown(last, current, pipeUp);
 
             }
-            if (posCurrent % colum != 0 && posCurrent != 0) {// Does not exceed the left limit
+            if (posCurrent % colums != 0 && posCurrent != 0) {// Does not exceed the left limit
                 pipeLeft = board.get(posLeft);
                 pipeNextLeft = pipeNextIsRightOrLeft(last, current, pipeLeft);
             }
-            if ((posCurrent + 1) % colum != 0) {// Does not exceed the right limit
+            if ((posCurrent + 1) % colums != 0) {// Does not exceed the right limit
                 pipeRigh = board.get(posRight);
                 pipeNextRight = pipeNextIsRightOrLeft(last, current, pipeRigh);
 
@@ -358,14 +358,14 @@ public class Board {
      */
     private String generateBoardPrintRecursively(int i, int j, String out) {
         String result;
-        if (i >= colum) {
+        if (i >= colums) {
             result = out;
-        } else if (j >= row) {
+        } else if (j >= rows) {
             result = generateBoardPrintRecursively(i + 1, 0, out + "\n");
         } else {
             if (i == 0 && j == 0) {
                 out += "\u001B[33mY\u001B[0m/\u001B[33mX\u001B[0m";
-                for (int k = 0; k < row; k++) {
+                for (int k = 0; k < rows; k++) {
                     out += "\u001B[33m" + String.format("%2d", k) + "\u001B[0m "; // Cambiar color de índices a amarillo
                 }
                 out += "\n";
@@ -373,7 +373,7 @@ public class Board {
             if (j == 0) {
                 out += "\u001B[33m" + String.format("%2d", i) + "\u001B[0m "; // Cambiar color de índices a amarillo
             }
-            int position = colum * i + j;
+            int position = colums * i + j;
             Pipe pipe = board.get(position);
             String content = pipe.getContent();
             if ("F".equals(content)) {
@@ -400,12 +400,12 @@ public class Board {
      */
 
     private void resetVisit(int i, int j) {
-        if (i >= colum) {
+        if (i >= colums) {
             return;
-        } else if (j >= row) {
+        } else if (j >= rows) {
             resetVisit(i + 1, 0);
         } else {
-            int position = colum * i + j;
+            int position = colums * i + j;
             Pipe pipe = (board).get(position);
             pipe.setVisit(TypeVisit.NOT_VISITED);
             resetVisit(i, j + 1);
@@ -475,15 +475,15 @@ public class Board {
      */
     private int accountUsedPipes(int i, int j, int account) {
         int result;
-        if (i >= colum)
+        if (i >= colums)
             result = account;
 
-        else if (j >= row)
+        else if (j >= rows)
             result = accountUsedPipes(i + 1, 0, account);
 
         else {
 
-            int position = colum * i + j;
+            int position = colums * i + j;
             Pipe pipe = board.get(position);
 
             if (pipe.getType().equals(PipeType.HORIZONTAL) || pipe.getType().equals(PipeType.VERTICAL)
