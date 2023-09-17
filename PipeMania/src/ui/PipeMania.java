@@ -191,7 +191,7 @@ public class PipeMania {
                     }
                 }
 
-                controller.putPipe(type, column, row);
+                controller.putPipe(type, row, column);
             }
         }
     }
