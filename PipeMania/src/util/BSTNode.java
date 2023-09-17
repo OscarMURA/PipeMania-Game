@@ -30,10 +30,13 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      search tree. It is used to maintain the hierarchical relationship between nodes in the tree. */ 
     private BSTNode <T> right;
 
+    private BSTNode <T> dad;
+
     public BSTNode(Object value) {
         this.value = (T) value;
         this.left = null;
         this.right = null;
+        this.dad = null;
     }
 
     /**
@@ -132,6 +135,12 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.right = right;
     }
 
+    public BSTNode<T> getDad(){
+        return dad;
+    }
 
+    public void setDad(BSTNode<T> dad){
+        this.dad = dad;
+    } 
 
 }
