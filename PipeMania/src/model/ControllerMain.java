@@ -69,7 +69,7 @@ public class ControllerMain {
             pipe = "X";
         }
         if (!pipe.equals("||") && !pipe.equals("=") && !pipe.equals("o") && !pipe.equals("X")) {
-            out = "Opción inválida de tubería";
+            out = "Invalid pipe option";
         } else {
             out = game.putPipe(pipe, x, y);
         }
@@ -99,7 +99,8 @@ public class ControllerMain {
         if (game.isWorkingPipeSystem()) {
             game.finishMatch();
             out = game.getPlayer().toString();
-            playersBST.add(game.getPlayer());
+            Player player = game.getPlayer();
+            playersBST.add(player);
         } else {
             out = "No funciona";
         }

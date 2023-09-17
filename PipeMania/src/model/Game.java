@@ -27,9 +27,7 @@ public class Game {
      * @return The method is returning the generated board print as a String.
      */
     public String initGame(String name) {
-        this.board = null;
         this.board = new Board(8, 8);
-        this.player = null;
         this.player = new Player(name);
         startTime = System.currentTimeMillis();
         return board.generateBoardPrint();
@@ -87,6 +85,8 @@ public class Game {
      * @return The method is returning a boolean value.
      */
     public boolean isWorkingPipeSystem() {
+        boolean validate = board.validationPipes();
+        System.out.println(!validate);
         return board.validationPipes();
     }
 
@@ -99,13 +99,16 @@ public class Game {
      */
     public String finishMatch() {
         String out;
-        if (board.validationPipes()) {
-            player.setMatch(board.generateBoardPrint());
-            player.setScore(calculateMatch());
+        if (board.validationPipes() == false) {
+            String table = board.generateBoardPrint();
+            player.setMatch(table);
+            double score = calculateMatch();
+            player.setScore(score);
             out = player.toString();
         } else {
             out = "No funciona";
         }
+
         return out;
     }
 
@@ -118,7 +121,7 @@ public class Game {
      */
     public double calculateMatch() {
         // Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
-        double score = (100 - board.accountUsedPipes()) * 10 - (System.currentTimeMillis() - startTime) / 1000;
+        double score = (int) (100 - board.accountUsedPipes()) * 10 - (System.currentTimeMillis() - startTime) / 1000.0;
         return score;
     }
 

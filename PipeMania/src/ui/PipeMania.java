@@ -3,6 +3,9 @@ package ui;
 import model.ControllerMain;
 import java.util.Scanner;
 
+/**
+ * The class is named "PipeMania" and does not contain any code.
+ */
 public class PipeMania {
     private UserExperience userExperience;
     private Scanner reader;
@@ -21,7 +24,9 @@ public class PipeMania {
     }
 
     public void menu() {
+        println("\u001B[32m"); // Cambiar el color del texto a verde
         userExperience.displayCell("PipeMania");
+        println("\u001B[0m"); // Cambiar el color del texto a verde
 
         String menuOptions = "1. New game\n" +
                 "2. View Score\n" +
@@ -35,8 +40,14 @@ public class PipeMania {
             case 2 -> {
                 String result = showScore();
                 userExperience.displayCell(result);
+                menu();
             }
-            case 3 -> userExperience.displayCell("Thanks for playing, exited the game\n");
+
+            case 3 -> {
+                println("\u001B[32m"); // Cambiar el color del texto a verde
+                userExperience.displayCell("Thanks for playing, exited the game\n");
+                println("\u001B[0m"); // Cambiar el color del texto a verde
+            }
             default -> {
                 println("\u001B[31m"); // Cambiar el color del texto a rojo
                 userExperience.displayCell("Invalid option, try again\n");
@@ -70,11 +81,13 @@ public class PipeMania {
             }
             case 2 -> {
                 String result = evaluatePipe();
+                println("\u001B[32m"); // Cambiar el color del texto a verde
                 userExperience.displayCell(result);
+                println("\u001B[0m"); // Cambiar el color del texto a verde
                 showGameRecursive(nickname);
             }
             case 3 -> {
-                String result = controller.finishMatch(); // Evaluación al salir del juego
+                String result = finishMatch(); // Evaluación al salir del juego
                 userExperience.displayCell(result); // Muestra el resultado
                 userExperience.displayCell("Return to main menu\n");
                 menu();
@@ -90,7 +103,7 @@ public class PipeMania {
 
     public void putPipe() {
         userExperience.displayCell("Enter the position of the pipe on the board\n");
-        userExperience.print("Position (row,column): ");
+        userExperience.print("Position (X,Y): ");
         String input = reader.nextLine();
         String errorMessage = userExperience.validateInput(input);
 
@@ -144,6 +157,10 @@ public class PipeMania {
 
     public String evaluatePipe() {
         return controller.evaluatePipe();
+    }
+
+    public String finishMatch() {
+        return controller.finishMatch();
     }
 
     public void println(Object println) {
