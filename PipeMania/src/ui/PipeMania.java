@@ -39,7 +39,7 @@ public class PipeMania {
             case 1 -> showGame();
             case 2 -> {
                 String ranking = showRanking();
-                userExperience.displayCell(ranking);
+                userExperience.displayCellWithHeader(ranking, "Ranking");
                 menu();
             }
 
@@ -58,7 +58,9 @@ public class PipeMania {
     }
 
     public void showGame() {
+        println("\u001B[33m"); // Cambiar el color del texto a verde
         userExperience.displayCell("Name user");
+        println("\u001B[0m"); // Cambiar el color del texto a verde
         userExperience.print("Enter your name: ");
         String nickname = reader.nextLine();
         controller.initGame(nickname);
@@ -89,7 +91,9 @@ public class PipeMania {
             case 3 -> {
                 String result = finishMatch(); // Evaluación al salir del juego
                 userExperience.displayCell(result); // Muestra el resultado
+                println("\u001B[32m"); // Cambiar el color del texto a verde
                 userExperience.displayCell("Return to main menu\n");
+                println("\u001B[0m"); // Cambiar el color del texto a verde
                 menu();
             }
             default -> {
@@ -102,7 +106,9 @@ public class PipeMania {
     }
 
     public void putPipe() {
+        println("\u001B[33m"); // Cambiar el color del texto a verde
         userExperience.displayCell("Enter the position of the pipe on the board\n");
+        println("\u001B[0m"); // Cambiar el color del texto a verde
         userExperience.print("Position (X,Y): ");
         String input = reader.nextLine();
         String errorMessage = userExperience.validateInput(input);

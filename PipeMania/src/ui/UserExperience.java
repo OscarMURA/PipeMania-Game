@@ -49,6 +49,20 @@ public class UserExperience {
 		System.out.println("╚" + horizontalLine + "╝");
 	}
 
+	public void displayCellWithHeader(String content, String header) {
+		String horizontalLine = "═".repeat(49);
+		System.out.println("╔" + horizontalLine + "╗");
+		System.out.println("║" + centerText(header, 49) + "║"); // Agregar el encabezado
+		System.out.println("╠" + horizontalLine + "╣"); // Agregar una línea divisoria
+		String[] lines = content.split("\n");
+		for (String line : lines) {
+			String ansiCode = "\u001B\\[[;\\d]*m";
+			String lineWithoutAnsi = line.replaceAll(ansiCode, "");
+			System.out.println("║" + centerText(line, 49) + "║");
+		}
+		System.out.println("╚" + horizontalLine + "╝");
+	}
+
 	/**
 	 * The function validates user input to ensure it is an integer.
 	 * 

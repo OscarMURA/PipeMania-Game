@@ -129,9 +129,9 @@ public class ControllerMain {
     public String getRanking() {
         String out = "";
         if (playersBST.isEmpty()) {
-            out = "No hay jugadores registrados.";
+            out = "There are no registered players";
         } else {
-            out = "Ranking:\n" + "\n" + playersBST.getRanking(4);
+            out = "\n" + "\n" + playersBST.getRanking(4);
         }
         return out;
     }
