@@ -1,5 +1,6 @@
 package util;
 
+<<<<<<< HEAD
 /**
  * The abstract class Collections provides a blueprint for classes that implement collection
  * functionality.
@@ -31,3 +32,12 @@ public abstract class Collections<T> {
     public abstract boolean isEmpty();
 
 }   
+=======
+public abstract   class Collections {
+
+    public abstract void add(Object o);
+
+    public abstract boolean isEmpty();
+
+}
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9

@@ -1,5 +1,6 @@
 package util;
 
+<<<<<<< HEAD
 import model.Player;
 
 /**
@@ -16,11 +17,17 @@ public class BST<T extends Comparable<T>> extends Collections {
      * tree.
      */
     private BSTNode<T> root;
+=======
+public class BST <T extends Comparable<T>>  extends Collections{
+
+    private BSTNode root;
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 
     public BST() {
         root = null;
     }
 
+<<<<<<< HEAD
     /**
      * // The `add(Object object)` method is used to add an element to the binary
      * search tree.
@@ -37,10 +44,21 @@ public class BST<T extends Comparable<T>> extends Collections {
             root = new BSTNode<>(value);
         } else {
             BSTNode<T> node = new BSTNode<>(value);
+=======
+
+    @Override
+    public void add(Object object) {
+        T value=(T) object;
+        if(root==null){
+            root=new BSTNode(value);
+        }else{
+            BSTNode node=new BSTNode(value);
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
             add(root, node);
         }
     }
 
+<<<<<<< HEAD
     /**
      * The add function inserts a node into a binary search tree based on its
      * content.
@@ -52,6 +70,10 @@ public class BST<T extends Comparable<T>> extends Collections {
      */
     public void add(BSTNode<T> current, BSTNode<T> node) {
         if ((current.getContent().compareTo(node.getContent()) > 0)) {
+=======
+    public void add(BSTNode current, BSTNode node){
+        if((current.getContent().compareTo(node.getContent())>0)){
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
             if (current.getLeft() == null) {
                 current.setLeft(node);
                 current.getLeft().setDad(current);
@@ -71,6 +93,7 @@ public class BST<T extends Comparable<T>> extends Collections {
         }
     }
 
+<<<<<<< HEAD
     /**
      * The function returns a string representation of the in-order traversal of a
      * binary tree using
@@ -88,10 +111,23 @@ public class BST<T extends Comparable<T>> extends Collections {
             result += inOrdenWithToString(current.getLeft());
             result += "* " + current.getContent().toString() + "\n";
             result += inOrdenWithToString(current.getRight());
+=======
+    public String inOrdenWithToString(){
+        return inOrdenWithToString(root);
+    }
+
+    private String inOrdenWithToString(BSTNode current){
+        String result="";
+        if(current!=null){
+            result+=inOrdenWithToString(current.getLeft());
+            result+="* "+current.getContent().toString()+"\n";
+            result+=inOrdenWithToString(current.getRight());
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         }
         return result;
     }
 
+<<<<<<< HEAD
     /**
      * The function returns the maximum value in a binary tree.
      * 
@@ -114,10 +150,25 @@ public class BST<T extends Comparable<T>> extends Collections {
             result = current.getContent();
         } else {
             result = getMaximum(current.getRight());
+=======
+
+
+    public T getMaximum(){
+        return getMaximum(root);
+    }
+
+    private T getMaximum(BSTNode current){
+        T result;
+        if(current.getRight()==null){
+            result= (T) current.getContent();
+        }else{
+            result= getMaximum(current.getRight());
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         }
         return result;
     }
 
+<<<<<<< HEAD
     /**
      * The function checks if the root of a data structure is null and returns true
      * if it is,
@@ -129,10 +180,14 @@ public class BST<T extends Comparable<T>> extends Collections {
      *         structure is empty, so the
      *         method will return true. Otherwise, it will return false.
      */
+=======
+
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
     @Override
     public boolean isEmpty() {
         return root == null;
     }
+<<<<<<< HEAD
 
     /**
      * The function recursively generates a ranking string based on a given position
@@ -202,4 +257,6 @@ public class BST<T extends Comparable<T>> extends Collections {
         return out;
     }
 
+=======
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 }

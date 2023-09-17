@@ -1,7 +1,44 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij+all
 
 ### Intellij+all ###
+=======
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+# Created by https://www.toptal.com/developers/gitignore/api/intellij+iml,java
+# Edit at https://www.toptal.com/developers/gitignore?templates=intellij+iml,java
+
+### Intellij+iml ###
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -59,12 +96,15 @@ out/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+<<<<<<< HEAD
 PipeMania/.idea/workspace.xml
 *.xml
 
 #visual parading
  ../doc/Integrative task 1.vpp.bak_001d
 
+=======
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 # JIRA plugin
 atlassian-ide-plugin.xml
 
@@ -86,6 +126,7 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+<<<<<<< HEAD
 ### Intellij+all Patch ###
 # Ignore everything but code style settings and run configurations
 # that are supposed to be shared within teams.
@@ -94,6 +135,15 @@ fabric.properties
 
 !.idea/codeStyles
 !.idea/runConfigurations
+=======
+### Intellij+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 
 ### Java ###
 # Compiled class file
@@ -121,4 +171,8 @@ fabric.properties
 hs_err_pid*
 replay_pid*
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all
+=======
+# End of https://www.toptal.com/developers/gitignore/api/intellij+iml,java
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9

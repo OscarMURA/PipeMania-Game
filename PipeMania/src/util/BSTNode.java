@@ -11,6 +11,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      the node. By using a generic type parameter, the `BSTNode` class can be used to store values of
      any type that implements the `Comparable` interface. */ 
     private T value;
+<<<<<<< HEAD
     /**The line `private BSTNode<T> parent;` is declaring a private instance variable `parent` of type
     BSTNode<T>`. This variable represents the parent node of the current node in a binary search
      tree. It is used to maintain the hierarchical relationship between nodes in the tree. */ 
@@ -29,6 +30,15 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
     `BSTNode<T>`. This variable represents the right child node of the current node in a binary
      search tree. It is used to maintain the hierarchical relationship between nodes in the tree. */ 
     private BSTNode <T> right;
+=======
+    private BSTNode parent;
+    private int size;
+
+    private BSTNode left;
+
+
+    private BSTNode right;
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
 
     private BSTNode <T> dad;
 
@@ -39,12 +49,16 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.dad = null;
     }
 
+<<<<<<< HEAD
     /**
      * The function returns the parent node of a binary search tree node.
      * 
      * @return The method is returning the parent node of the current node in a binary search tree.
      */
     public BSTNode<T> getParent() {
+=======
+    public BSTNode getParent() {
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         return parent;
     }
 
@@ -57,6 +71,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         return size;
     }
 
+<<<<<<< HEAD
     /**
      * The function sets the parent of a binary search tree node.
      * 
@@ -64,6 +79,9 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      * the current node in a binary search tree.
      */
     public void setParent(BSTNode<T> parent) {
+=======
+    public void setParent(BSTNode parent) {
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         this.parent = parent;
     }
 
@@ -87,6 +105,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.value = (T) p;
     }
 
+<<<<<<< HEAD
     /**
      * The function returns the left child of a binary search tree node.
      * 
@@ -102,6 +121,13 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      * @return The right child node of the current node in a binary search tree.
      */
     public BSTNode<T> getRight() {
+=======
+    public BSTNode getLeft() {
+        return this.left;
+    }
+
+    public BSTNode getRight() {
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         return this.right;
     }
 
@@ -115,6 +141,7 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
         this.value = value;
     }
 
+<<<<<<< HEAD
     /**
      * The function sets the left child of a binary search tree node.
      * 
@@ -132,6 +159,13 @@ public class BSTNode<T extends  Comparable<T>> implements Node {
      * binary search tree node.
      */
     public void setRight(BSTNode<T> right) {
+=======
+    public void setLeft(BSTNode left) {
+        this.left = left;
+    }
+
+    public void setRight(BSTNode right) {
+>>>>>>> 3255f864498f8d33e5e42d357d45bd7e190460f9
         this.right = right;
     }
 
