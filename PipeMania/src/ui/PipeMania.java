@@ -32,7 +32,10 @@ public class PipeMania {
         int option = userExperience.validateInt();
         switch (option) {
             case 1 -> showGame();
-            case 2 -> showScore();
+            case 2 -> {
+                String result = showScore();
+                userExperience.displayCell(result);
+            }
             case 3 -> userExperience.displayCell("Thanks for playing, exited the game\n");
             default -> {
                 println("\u001B[31m"); // Cambiar el color del texto a rojo
@@ -71,6 +74,8 @@ public class PipeMania {
                 showGameRecursive(nickname);
             }
             case 3 -> {
+                String result = controller.finishMatch(); // Evaluación al salir del juego
+                userExperience.displayCell(result); // Muestra el resultado
                 userExperience.displayCell("Return to main menu\n");
                 menu();
             }
@@ -133,8 +138,8 @@ public class PipeMania {
         }
     }
 
-    public void showScore() {
-
+    public String showScore() {
+        return controller.getRanking();
     }
 
     public String evaluatePipe() {
