@@ -166,7 +166,9 @@ public class PipeMania {
 
                 putPipe(); // Volver a solicitar las coordenadas
             } else {
+                println("\u001B[34m"); // Cambiar el color del texto a verde
                 userExperience.displayCell("Kind of pipes\n");
+                println("\u001B[0m"); // Cambiar el color del texto a verde
                 String menuOptions = "1. Horizontal pipe\n" +
                         "2. Vertical pipe\n" +
                         "3. Circular pipe\n" +
