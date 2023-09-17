@@ -116,12 +116,24 @@ public class ControllerMain {
     }
 
     /**
-     * The function returns the ranking of players in a binary search tree.
+     * The function returns the ranking of players, or a message indicating that
+     * there are no
+     * registered players.
      * 
-     * @return The method is returning a String value.
+     * @return The method is returning a string. If the playersBST is empty, it
+     *         returns the message "No
+     *         hay jugadores registrados." Otherwise, it returns the ranking of the
+     *         players, with the number 4
+     *         indicating the top 4 players in the ranking.
      */
     public String getRanking() {
-        return "Ranking:\n" + "\n" + playersBST.getRanking(4);
+        String out = "";
+        if (playersBST.isEmpty()) {
+            out = "No hay jugadores registrados.";
+        } else {
+            out = "Ranking:\n" + "\n" + playersBST.getRanking(4);
+        }
+        return out;
     }
 
 }
