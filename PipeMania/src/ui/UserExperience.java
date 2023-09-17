@@ -183,4 +183,17 @@ public class UserExperience {
 	public void close() {
 		reader.close();
 	}
+
+	/**
+	 * The function "lines" returns a string consisting of a line of equal signs.
+	 * 
+	 * @return The method is returning a string that consists of a line of equal
+	 *         signs.
+	 */
+	public String lines() {
+		String line = "";
+		line = "===================================================";
+		return line;
+
+	}
 }
