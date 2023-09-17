@@ -22,11 +22,6 @@ public class UserExperience {
 		reader = new Scanner(System.in);
 	}
 
-	public void clearScreen() {
-		System.out.print("\033[H\033[2J"); // Limpia la pantalla
-		System.out.flush();
-	}
-
 	/**
 	 * The function `displayCell` takes a string `content` and displays it inside a
 	 * bordered cell with
