@@ -24,7 +24,7 @@ public class PipeMania {
     }
 
     public void menu() {
-        println("\u001B[32m"); // Cambiar el color del texto a verde
+        println("\u001B[34m"); // Cambiar el color del texto a verde
         userExperience.displayCell("PipeMania");
         println("\u001B[0m"); // Cambiar el color del texto a verde
 
@@ -38,8 +38,8 @@ public class PipeMania {
         switch (option) {
             case 1 -> showGame();
             case 2 -> {
-                String result = showScore();
-                userExperience.displayCell(result);
+                String ranking = showRanking();
+                userExperience.displayCell(ranking);
                 menu();
             }
 
@@ -151,7 +151,7 @@ public class PipeMania {
         }
     }
 
-    public String showScore() {
+    public String showRanking() {
         return controller.getRanking();
     }
 

@@ -117,7 +117,7 @@ public class Player implements Comparable<Player> {
     @Override
     public String toString() {
         return "User: " + nickName + ", Score = " +
-                score + "\n" + "\n Match:\n" + match + "\n";
+                (int) score + "\n" + "\n Match:\n" + match + "\n";
     }
 
     /**

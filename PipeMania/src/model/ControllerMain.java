@@ -102,7 +102,7 @@ public class ControllerMain {
             Player player = game.getPlayer();
             playersBST.add(player);
         } else {
-            out = "No funciona";
+            out = "The pipe doesn't work";
         }
         return out;
     }
@@ -121,6 +121,7 @@ public class ControllerMain {
      * @return The method is returning a String value.
      */
     public String getRanking() {
-        return "Ranking:\n" + playersBST.getRanking(4);
+        return "Ranking:\n" + "\n" + playersBST.getRanking(4);
     }
+
 }

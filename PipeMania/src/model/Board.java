@@ -25,8 +25,6 @@ public class Board {
      * can only be accessed within the `Board` class.
      */
     private int colum;
-    private static final String ANSI_RESET = "\u001B[0m"; // Restablecer color a predeterminado
-    private static final String ANSI_BLUE = "\u001B[34m"; // Color azul
 
     /**
      * is declaring a public instance variable named `row` of type `int`.

@@ -63,9 +63,9 @@ public class Game {
     public String evaluatePipe() {
         String out;
         if (board.validationPipes()) {
-            out = "La solución es correcta";
+            out = "The solution is correct";
         } else {
-            out = "La tubería no funciona";
+            out = "The pipe doesn't work";
         }
         return out;
     }
@@ -106,7 +106,7 @@ public class Game {
             player.setScore(score);
             out = player.toString();
         } else {
-            out = "No funciona";
+            out = "The pipe doesn't work";
         }
 
         return out;
@@ -121,7 +121,8 @@ public class Game {
      */
     public double calculateMatch() {
         // Puntos = (100 - tuberiasUsadas) * 10 - tiempoEnSegundos
-        double score = (int) (100 - board.accountUsedPipes()) * 10 - (System.currentTimeMillis() - startTime) / 1000.0;
+        double score = (int) ((100 - board.accountUsedPipes()) * 10
+                - (System.currentTimeMillis() - startTime) / 1000.0);
         return score;
     }
 
